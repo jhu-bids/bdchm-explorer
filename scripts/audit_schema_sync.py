@@ -150,7 +150,9 @@ def run_classifier(schema: dict, label: str) -> dict:
         out_path = Path(tmp) / "verdicts.json"
         in_path.write_text(json.dumps(schema))
         proc = subprocess.run(
-            ["./node_modules/.bin/vitest", "run",
+            # node + vitest.mjs, not node_modules/.bin/vitest: the .bin entry is a
+            # shell stub that Windows cannot exec.
+            ["node", "node_modules/vitest/vitest.mjs", "run",
              "scripts/dump_classifier.test.ts", "--reporter=dot"],
             cwd=REPO_ROOT,
             capture_output=True, text=True,
@@ -161,7 +163,7 @@ def run_classifier(schema: dict, label: str) -> dict:
         if not out_path.exists():
             die(
                 f"could not run the ownership classifier for {label}.\n"
-                f"  tried: npx vitest run scripts/dump_classifier.test.ts\n"
+                f"  tried: node node_modules/vitest/vitest.mjs run scripts/dump_classifier.test.ts\n"
                 f"  is node_modules installed? (npm ci)\n\n"
                 f"{proc.stdout[-1500:]}{proc.stderr[-1500:]}"
             )
@@ -291,7 +293,7 @@ def main() -> int:
     lines += [f"~ {p}" for p in rename_pairs(added_c, removed_c, old["classes"], new["classes"])]
     if lines:
         lines.append("-> categorize each new class in src/config/entityCategories.ts")
-        lines.append("   (or record it in UNCATEGORIZED_BY_DESIGN); `npm run test:sync` enforces this")
+        lines.append("   (or record it in UNCATEGORIZED_BY_DESIGN); `make test-sync` enforces this")
     rep.add("Classes added / removed", lines)
 
     # 2. slot sites ---------------------------------------------------------

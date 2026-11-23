@@ -12,7 +12,9 @@
 # to look at and why.
 
 SYNC_BRANCH := schema-sync/upstream-update
-PY          := python3
+# uv runs the scripts/ project (pyproject.toml + uv.lock) on macOS, Linux and
+# Windows alike, and installs the Python it needs.
+PY          := uv run --project scripts python
 
 .DEFAULT_GOAL := help
 
@@ -132,13 +134,11 @@ sync-checkout:  ## Check out the sync branch to make fixes on it
 
 .PHONY: sync-manual
 sync-manual:  ## Run the sync yourself (Action does this daily)
-	cd scripts && (test -d .venv || npm run --prefix .. setup-python) \
-	  && .venv/bin/python download_source_data.py --update
+	cd scripts && uv run python download_source_data.py --update
 
 .PHONY: sync-check
 sync-check:  ## Is upstream ahead? (no changes written)
-	cd scripts && (test -d .venv || npm run --prefix .. setup-python) \
-	  && .venv/bin/python download_source_data.py --check
+	cd scripts && uv run python download_source_data.py --check
 
 # --------------------------------------------------------------------------
 # browser probes
