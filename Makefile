@@ -13,8 +13,10 @@
 
 SYNC_BRANCH := schema-sync/upstream-update
 # uv runs the scripts/ project (pyproject.toml + uv.lock) on macOS, Linux and
-# Windows alike, and installs the Python it needs.
-PY          := uv run --project scripts python
+# Windows alike, and installs the Python it needs. -X utf8: under Git Bash,
+# Python sees a pipe rather than a console and falls back to cp1252, which
+# cannot print the scripts' check marks or reliably read bdchm.yaml.
+PY          := uv run --project scripts python -X utf8
 
 .DEFAULT_GOAL := help
 
@@ -63,9 +65,14 @@ sync-status:  ## Is there an open sync PR? What does it change?
 	fi
 
 .PHONY: sync-audit
+# Exit 1 means "flagged something": an answer, not a failure. sync-review runs
+# AUDIT directly rather than through $(MAKE) sync-audit, so that answer doesn't
+# print as "make: *** [sync-audit] Error 1".
+AUDIT := git fetch -q origin $(SYNC_BRANCH) 2>/dev/null; \
+         $(PY) scripts/audit_schema_sync.py --base main --head origin/$(SYNC_BRANCH)
+
 sync-audit:  ## Audit the open sync PR for silent breakage
-	@git fetch -q origin $(SYNC_BRANCH) 2>/dev/null || true
-	@$(PY) scripts/audit_schema_sync.py --base main --head origin/$(SYNC_BRANCH)
+	@$(AUDIT)
 
 .PHONY: sync-audit-local
 sync-audit-local:  ## Audit the working tree (use after checking the branch out)
@@ -84,7 +91,7 @@ sync-review:  ## FULL REVIEW: status + audit + tests + build (start here)
 	@echo "=============================================================="
 	@echo " AUDIT -- changes the diff won't show you"
 	@echo "=============================================================="
-	@$(MAKE) --no-print-directory sync-audit; audit=$$?; \
+	@$(AUDIT); audit=$$?; \
 	 echo "=============================================================="; \
 	 echo " TESTS"; \
 	 echo "=============================================================="; \
@@ -99,28 +106,11 @@ sync-review:  ## FULL REVIEW: status + audit + tests + build (start here)
 	 echo " WHAT TO DO NEXT"; \
 	 echo "=============================================================="; \
 	 if [ $$audit -ne 0 ]; then \
-	   echo "The audit flagged items (the [!] sections above). For each one:"; \
-	   echo ""; \
-	   echo "  New class            -> add it to a category in"; \
-	   echo "                          src/config/entityCategories.ts"; \
-	   echo "  Stale override       -> the slot was renamed or removed; update"; \
-	   echo "                          the set in src/models/containmentGraph.ts"; \
-	   echo "  Ownership flip       -> decide whether the new direction is right."; \
-	   echo "                          This one is a judgment call, not a lookup:"; \
-	   echo "                          see docs/OWNERSHIP_CLASSIFICATION.md"; \
-	   echo "  Lost inbound edge    -> the class now draws as a root with nothing"; \
-	   echo "                          pointing at it. Usually a range widened to"; \
-	   echo "                          Entity. Decide if that is acceptable."; \
-	   echo ""; \
-	   echo "Then: make sync-checkout, fix on the branch, re-run make sync-review."; \
+	   echo "The audit flagged the [!] sections above. MAINTAINING.md,"; \
+	   echo "\"2. Act on what the audit flags\", says what to do for each."; \
 	 else \
 	   echo "Nothing flagged. Tests and build pass."; \
-	   echo ""; \
-	   echo "To merge:  gh pr merge $(SYNC_BRANCH) --squash"; \
-	   echo "       or: git checkout main && git merge $(SYNC_BRANCH)"; \
-	   echo ""; \
-	   echo "Note this only merges the schema data. Nothing is pushed or"; \
-	   echo "deployed -- run npm run deploy separately when you want it live."; \
+	   echo "Continue at MAINTAINING.md, \"3. Look at the app\"."; \
 	 fi
 
 # --------------------------------------------------------------------------
@@ -134,11 +124,39 @@ sync-checkout:  ## Check out the sync branch to make fixes on it
 
 .PHONY: sync-manual
 sync-manual:  ## Run the sync yourself (Action does this daily)
-	cd scripts && uv run python download_source_data.py --update
+	$(PY) scripts/download_source_data.py --update
 
 .PHONY: sync-check
 sync-check:  ## Is upstream ahead? (no changes written)
-	cd scripts && uv run python download_source_data.py --check
+	@$(PY) scripts/download_source_data.py --check || [ $$? -eq 1 ]  # 1 = upstream moved, an answer, not a failure
+
+# --------------------------------------------------------------------------
+# deploy
+# --------------------------------------------------------------------------
+
+# `npm run deploy` publishes whatever is in the working tree, so this refuses
+# unless it is exactly origin/main. gh-pages prints "Published" even when the
+# build matched what was live and it pushed nothing; comparing origin/gh-pages
+# before and after says which happened.
+.PHONY: deploy
+deploy:  ## Build and publish the live site (main only, clean, up to date)
+	@git fetch -q origin main gh-pages
+	@[ "$$(git branch --show-current)" = main ] \
+	  || { echo "Deploy from main:  git checkout main"; exit 1; }
+	@[ -z "$$(git status --porcelain)" ] \
+	  || { echo "Uncommitted or untracked files; commit or remove them first:"; git status --short; exit 1; }
+	@[ "$$(git rev-parse HEAD)" = "$$(git rev-parse origin/main)" ] \
+	  || { echo "Your main differs from GitHub's.  git pull  (or push your commits) first."; exit 1; }
+	@before=$$(git rev-parse origin/gh-pages); \
+	 npm run deploy || exit 1; \
+	 git fetch -q origin gh-pages; \
+	 echo ""; \
+	 if [ "$$(git rev-parse origin/gh-pages)" = "$$before" ]; then \
+	   echo "Nothing to publish: the live site already matches main."; \
+	 else \
+	   echo "Deployed. The live site updates within a minute or two:"; \
+	   echo "  https://jhu-bids.github.io/bdchm-explorer/"; \
+	 fi
 
 # --------------------------------------------------------------------------
 # browser probes

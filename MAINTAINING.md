@@ -16,7 +16,7 @@ your review, so you get a notification.
 That's all it does. Nothing merges on its own, merging doesn't update the live
 site, and nothing warns you if the PR sits there. The live site
 (https://jhu-bids.github.io/bdchm-explorer/) changes only when someone runs
-`npm run deploy`.
+`make deploy`.
 
 If the repo has no commits for 60 days, GitHub switches the daily run off. The
 Actions tab then shows a banner on *Schema sync*; click **Enable workflow**.
@@ -111,7 +111,7 @@ The first run takes a few minutes longer while uv sets up Python.
 | Audit section | What it means | What to do |
 | --- | --- | --- |
 | Classes added / removed | Upstream added or dropped a class. A new class that isn't in a category doesn't appear anywhere in the app. | Add it to a category in [entityCategories.ts](src/config/entityCategories.ts). |
-| Slot sites added / removed | A field appeared on or disappeared from a class. Usually ordinary schema change. | Open those classes in the app (step 3) and check they still look right. |
+| Slot sites added / removed | A field appeared on or disappeared from a class. Usually ordinary schema change. A class losing `id` usually means upstream made it a value type with no standalone meaning; the app then shows it floating unless its owner is showing, which is correct. | Open those classes in the app (step 3) and check they still look right. |
 | Hand-curated override sets vs. schema | A field named in [containmentGraph.ts](src/models/containmentGraph.ts) was renamed or removed. | Update the set in that file to the new name. |
 | Range / cardinality changes, or classes that became ownership roots | What owns what in the diagram may have changed. | A judgment call; see [OWNERSHIP_CLASSIFICATION.md](docs/OWNERSHIP_CLASSIFICATION.md). Ask Siggie if unsure. |
 | Classes that lost every inbound reference | A class now appears with nothing pointing at it. | Usually a field's range widened to `Entity`. Decide whether that's acceptable. |
@@ -149,12 +149,14 @@ gh pr merge schema-sync/upstream-update --squash --delete-branch
 ```
 git checkout main
 git pull
-npm run deploy
+make deploy
 ```
 
 This builds the site and pushes it to the `gh-pages` branch, which GitHub
-Pages serves. The live site updates within a minute or two; reload it to
-check.
+Pages serves. It refuses to run unless you're on `main` with no local changes
+and up to date with GitHub, since it publishes whatever is in your working
+copy. The live site updates within a minute or two; reload it to check. If
+nothing changed since the last deploy, it says so and pushes nothing.
 
 ## Updating by hand
 

@@ -146,7 +146,7 @@ npm run typecheck
 npm run build
 
 # Deploy to GitHub Pages
-npm run deploy
+make deploy        # refuses unless on a clean, up-to-date main
 ```
 
 ### Testing

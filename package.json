@@ -12,7 +12,7 @@
     "preview": "vite preview",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d dist",
-    "download-data": "cd scripts && uv run python download_source_data.py",
+    "download-data": "uv run --project scripts python -X utf8 scripts/download_source_data.py",
     "test": "vitest",
     "test:ui": "vitest --ui",
     "test:coverage": "vitest --coverage",

@@ -8,6 +8,45 @@ Newest first.
 
 
 ---
+## 2026-11-23 — Siggie walked MAINTAINING.md on a real sync PR (#1)
+
+- Setup: 1003725 rolled the schema back one sync so the Action would open a PR.
+  Siggie ran "When a sync PR arrives" through deploy on macOS; Windows steps
+  are still untried. Fixes below were made as each step tripped.
+- `-X utf8` on every Python call (Makefile `PY`, npm `download-data`): under
+  Git Bash's mintty Python sees a pipe, falls back to cp1252, and can't print
+  the scripts' ✓/✗; bdchm.yaml has non-ASCII lines too. The flag, not
+  `PYTHONUTF8=1`, because npm runs scripts through cmd.exe on Windows. Predicted
+  from reading, not observed on Windows. `sync-manual`/`sync-check` now go
+  through `$(PY)` (scripts don't depend on cwd).
+- Exit 1 from `--check` and from the audit is an answer ("upstream moved",
+  "flagged something") but printed as `make: *** Error 1`. `sync-check` maps 1
+  to success; `sync-review` runs `$(AUDIT)` inline instead of `$(MAKE)
+  sync-audit`.
+- sync-review's "WHAT TO DO NEXT" kept its own list of cases, which omitted
+  "Slot sites" (the only thing this PR flagged) and offered a local
+  `git merge` MAINTAINING.md doesn't use. Now points at MAINTAINING.md step 2/3
+  so there's one list.
+- The flag was `<Class>.id` removed on Activity, CauseOfDeath, Context,
+  TimePeriod, TimePoint: upstream dropped `is_a: Entity` (value types, no
+  standalone meaning). App shows them floating unless an owner is showing;
+  Siggie confirmed correct. Proposed an audit section for is_a changes;
+  Siggie declined. Added a sentence to the Slot sites row instead.
+- Deploy "didn't work": gh-pages stayed at 768d699. It skips the commit when
+  dist matches (`diff-index --quiet`, node_modules/gh-pages/lib/git.js:167) but
+  still prints "Published". The 07:03 deploy was from before the rollback, so
+  the live site already had this schema. Verified dist blob hashes == gh-pages
+  tree. Hence `make deploy`: refuses unless clean, on main, == origin/main
+  (npm run deploy publishes the working tree), and reports whether gh-pages
+  actually moved.
+- gh-pages carried .github/, .gitignore, .nvmrc, scripts/.python-version from
+  the repo copy (gh-pages never touches dotfiles). Removed in a plumbing commit
+  on local `gh-pages` (affc6df); Siggie pushes.
+- Makefile/package.json changes need porting to dmvd (in-app/apps/dmvd; the
+  patch applies cleanly there, not to the older standalone clone).
+
+
+---
 ## 2026-09-28 — HELP_PACKAGE_PLAN rewritten for separate packages + vs-hub
 
 - An earlier planning session (help package for vs-hub) is lost: not in any
