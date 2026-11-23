@@ -2,7 +2,9 @@
 
 Interactive documentation browser for the [BioData Catalyst Harmonized Model (BDCHM)](https://github.com/RTIInternational/NHLBI-BDC-DMC-HM) - a LinkML data model connecting clinical/observational classes to variable specifications.
 
-**Live Demo**: https://sigfried.github.io/dynamic-model-var-docs/
+**Live Demo**: https://jhu-bids.github.io/bdchm-explorer/
+
+JHU BIDS's copy of [Sigfried/dynamic-model-var-docs](https://github.com/Sigfried/dynamic-model-var-docs), copied 2026-11-23 with full history. Sigfried Gold continues developing the original, live at https://sigfried.github.io/dynamic-model-var-docs/.
 
 ---
 

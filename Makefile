@@ -45,7 +45,7 @@ test-help-content:  ## Check help-content.md against FORMAT.md (fields, ids, anc
 sync-status:  ## Is there an open sync PR? What does it change?
 	@gh pr list --state open --label schema-sync 2>/dev/null; \
 	 if [ $$? -ne 0 ]; then \
-	   echo "(gh unavailable -- check github.com/Sigfried/dynamic-model-var-docs/pulls)"; \
+	   echo "(gh unavailable -- check github.com/jhu-bids/bdchm-explorer/pulls)"; \
 	 fi
 	@git fetch -q origin $(SYNC_BRANCH) 2>/dev/null || true
 	@echo ""

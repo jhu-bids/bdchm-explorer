@@ -30,7 +30,7 @@ export default defineConfig({
     ? 'github'
     : [['list'], ['html', { open: 'never' }]],
   use: {
-    baseURL: 'http://localhost:4173/dynamic-model-var-docs/',
+    baseURL: 'http://localhost:4173/bdchm-explorer/',
     trace: 'on-first-retry',
   },
   projects: [
@@ -56,7 +56,7 @@ export default defineConfig({
   ],
   webServer: {
     command: 'npm run build && npx vite preview --port 4173 --strictPort',
-    url: 'http://localhost:4173/dynamic-model-var-docs/',
+    url: 'http://localhost:4173/bdchm-explorer/',
     /* ⚠️ Never reuse: an adopted leftover server skips `npm run build`, so the
        suite silently tests a stale bundle. Worth the ~2s rebuild. */
     reuseExistingServer: false,

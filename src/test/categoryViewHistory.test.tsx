@@ -71,7 +71,7 @@ describe('category content view and browser history', () => {
 
   beforeEach(() => {
     localStorage.clear();
-    window.history.replaceState(null, '', '/dynamic-model-var-docs/');
+    window.history.replaceState(null, '', '/bdchm-explorer/');
     resetTourRequest();
   });
 

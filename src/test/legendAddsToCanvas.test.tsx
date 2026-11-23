@@ -21,7 +21,7 @@ const sel = () => new URLSearchParams(window.location.search).get('sel');
 describe('legend selection adds to the canvas', () => {
   beforeAll(async () => { await loadModelData(); });
   beforeEach(() => {
-    window.history.replaceState(null, '', '/dynamic-model-var-docs/?sel=Person&legend=1');
+    window.history.replaceState(null, '', '/bdchm-explorer/?sel=Person&legend=1');
   });
 
   test('clicking a class in the legend keeps what was already drawn', async () => {

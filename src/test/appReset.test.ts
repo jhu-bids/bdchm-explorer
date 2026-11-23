@@ -22,7 +22,7 @@ describe('App Reset Functionality', () => {
       ...originalLocation,
       href: 'http://localhost/',
       search: '',
-      pathname: '/dynamic-model-var-docs/',
+      pathname: '/bdchm-explorer/',
       reload: vi.fn()
     } as any;
   });
@@ -55,10 +55,10 @@ describe('App Reset Functionality', () => {
       params.delete('lve');
       params.delete('rce');
 
-      const newURL = `/dynamic-model-var-docs/${params.toString() ? '?' + params.toString() : ''}`;
+      const newURL = `/bdchm-explorer/${params.toString() ? '?' + params.toString() : ''}`;
 
       // Verify URL is cleaned
-      expect(newURL).toBe('/dynamic-model-var-docs/?l=c');
+      expect(newURL).toBe('/bdchm-explorer/?l=c');
       expect(newURL).not.toContain('rve');
       expect(newURL).not.toContain('lce');
     });
@@ -76,9 +76,9 @@ describe('App Reset Functionality', () => {
       params.delete('lve');
       params.delete('rve');
 
-      const newURL = `/dynamic-model-var-docs/${params.toString() ? '?' + params.toString() : ''}`;
+      const newURL = `/bdchm-explorer/${params.toString() ? '?' + params.toString() : ''}`;
 
-      expect(newURL).toBe('/dynamic-model-var-docs/?l=c');
+      expect(newURL).toBe('/bdchm-explorer/?l=c');
     });
   });
 
@@ -103,7 +103,7 @@ describe('App Reset Functionality', () => {
       // Note: expansion params (rve) are NOT deleted by saveStateToURL
       // They remain until page reload
 
-      const newURL = `/dynamic-model-var-docs/${params.toString() ? '?' + params.toString() : ''}`;
+      const newURL = `/bdchm-explorer/${params.toString() ? '?' + params.toString() : ''}`;
 
       // URL encoding converts comma to %2C
       expect(newURL).toContain('l=c%2Ce');
@@ -131,7 +131,7 @@ describe('App Reset Functionality', () => {
       // Note: saveStateToURL preserves other params (like rve, lce)
       // because it starts with existing params
 
-      const newURL = `/dynamic-model-var-docs/${params.toString() ? '?' + params.toString() : ''}`;
+      const newURL = `/bdchm-explorer/${params.toString() ? '?' + params.toString() : ''}`;
 
       // Expansion params are still in URL before reload
       expect(newURL).toContain('l=c');
@@ -156,9 +156,9 @@ describe('App Reset Functionality', () => {
       params.delete('lve');
       params.delete('rve');
 
-      const newURL = `/dynamic-model-var-docs/${params.toString() ? '?' + params.toString() : ''}`;
+      const newURL = `/bdchm-explorer/${params.toString() ? '?' + params.toString() : ''}`;
 
-      expect(newURL).toBe('/dynamic-model-var-docs/?l=c');
+      expect(newURL).toBe('/bdchm-explorer/?l=c');
       expect(newURL.split('?')[1]?.split('&').length).toBe(1); // Only 'l=c'
     });
   });

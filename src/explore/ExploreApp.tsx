@@ -439,7 +439,7 @@ function ExploreAppInner() {
             The mark is an inline SVG rather than a glyph because Unicode has
             no GitHub logo — the rest of the app's icons are glyphs. */}
         <a
-          href="https://github.com/Sigfried/dynamic-model-var-docs"
+          href="https://github.com/jhu-bids/bdchm-explorer"
           target="_blank"
           rel="noopener noreferrer"
           className="text-blue-100 hover:text-white"

@@ -21,7 +21,7 @@ export default defineConfig({
   workers: 1,
   reporter: 'list',
   use: {
-    baseURL: 'http://localhost:5173/dynamic-model-var-docs/',
+    baseURL: 'http://localhost:5173/bdchm-explorer/',
   },
   projects: [
     { name: 'chromium', use: { ...devices['Desktop Chrome'], viewport: { width: 1600, height: 1000 } } },

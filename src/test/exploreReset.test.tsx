@@ -25,7 +25,7 @@ describe('Explore title-click reset', () => {
   });
 
   beforeEach(() => {
-    window.history.replaceState(null, '', '/dynamic-model-var-docs/');
+    window.history.replaceState(null, '', '/bdchm-explorer/');
   });
 
   const renderApp = async () => {
@@ -35,7 +35,7 @@ describe('Explore title-click reset', () => {
   };
 
   test('clears selection and the URL when the title is clicked', async () => {
-    window.history.replaceState(null, '', '/dynamic-model-var-docs/?sel=BodySite~Person');
+    window.history.replaceState(null, '', '/bdchm-explorer/?sel=BodySite~Person');
     await renderApp();
 
     await waitFor(() => expect(params().get('sel')).toBe('BodySite~Person'));
@@ -52,7 +52,7 @@ describe('Explore title-click reset', () => {
     // ?exp= is a dead param from before expanding became selecting. An old
     // link carrying one must not strand an id the URL writer never rewrites.
     window.history.replaceState(
-      null, '', '/dynamic-model-var-docs/?sel=Person&exp=Participant&detail=Person',
+      null, '', '/bdchm-explorer/?sel=Person&exp=Participant&detail=Person',
     );
     await renderApp();
 
@@ -74,7 +74,7 @@ describe('Explore title-click reset', () => {
     // canvas. The overlays are part of the view being cleared, unlike the
     // toolbar settings, which are a reading preference and stay put.
     window.history.replaceState(
-      null, '', '/dynamic-model-var-docs/?sel=Person&legend=1&cases=1',
+      null, '', '/bdchm-explorer/?sel=Person&legend=1&cases=1',
     );
     await renderApp();
 
@@ -89,7 +89,7 @@ describe('Explore title-click reset', () => {
   });
 
   test('re-opens the selection table if it was collapsed', async () => {
-    window.history.replaceState(null, '', '/dynamic-model-var-docs/?sel=Person');
+    window.history.replaceState(null, '', '/bdchm-explorer/?sel=Person');
     await renderApp();
 
     // Collapse, then reset: an empty canvas behind a collapsed panel reads as

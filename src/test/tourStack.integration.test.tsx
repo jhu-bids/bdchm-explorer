@@ -49,7 +49,7 @@ describe('tour state stack, end to end', () => {
 
   beforeEach(() => {
     localStorage.clear();
-    window.history.replaceState(null, '', '/dynamic-model-var-docs/');
+    window.history.replaceState(null, '', '/bdchm-explorer/');
     // `?tour` is latched on first read so it can outlive the URL rewrite;
     // one module instance serves every test here, so each simulated page load
     // has to clear it.
@@ -107,7 +107,7 @@ describe('tour state stack, end to end', () => {
      * address bar forever -- a `tour` left there would restart the tour on
      * every reload and be copied into whatever the visitor shared next.
      */
-    window.history.replaceState(null, '', '/dynamic-model-var-docs/?tour&sel=Person');
+    window.history.replaceState(null, '', '/bdchm-explorer/?tour&sel=Person');
     render(<ExploreApp />);
     // `next|done`: the link starts the file's FIRST tour, which is today a
     // one-step introduction whose only forward control says "done".
@@ -140,7 +140,7 @@ describe('tour state stack, end to end', () => {
      * `held` started empty, so the replace swept a selection it should have
      * suppressed and `X` was gone for good.
      */
-    window.history.replaceState(null, '', '/dynamic-model-var-docs/?tour&sel=Person');
+    window.history.replaceState(null, '', '/bdchm-explorer/?tour&sel=Person');
     render(<ExploreApp />);
     await screen.findByRole('button', { name: /next|done/i, hidden: true });
     // Suppressed by the opening step's `Only:` — whatever that step selects,
@@ -329,7 +329,7 @@ describe('tour state stack, end to end', () => {
      * writes that param and an absolute query replaces everything. Nothing
      * warned; the canvas just changed density mid-tour.
      */
-    window.history.replaceState(null, '', '/dynamic-model-var-docs/?sibs=0&dir=DOWN');
+    window.history.replaceState(null, '', '/bdchm-explorer/?sibs=0&dir=DOWN');
     await startTour();
 
     for (let i = 0; i < 12 && !sel(); i++) next();
@@ -344,7 +344,7 @@ describe('tour state stack, end to end', () => {
     // discarded" warning: the tour composes on top of the viewer's state
     // instead of replacing it, so there is nothing to restore and nothing to
     // apologise for.
-    window.history.replaceState(null, '', '/dynamic-model-var-docs/?sel=Visit');
+    window.history.replaceState(null, '', '/bdchm-explorer/?sel=Visit');
     await startTour();
 
     // All the way to the end, so the final `done` unwinds the stack too. A
@@ -402,7 +402,7 @@ describe('tour state stack, end to end', () => {
      * never arrived, or if a mid-tour tick landed in the wrong set: the class
      * would be composed away as the tour's and vanish at the exit.
      */
-    window.history.replaceState(null, '', '/dynamic-model-var-docs/?sel=Visit');
+    window.history.replaceState(null, '', '/bdchm-explorer/?sel=Visit');
     await startTour();
 
     // Walk to a step that draws something, so the tick happens over a canvas
@@ -424,7 +424,7 @@ describe('tour state stack, end to end', () => {
   });
 
   test('leaving mid-tour unwinds what the tour added, and only that', async () => {
-    window.history.replaceState(null, '', '/dynamic-model-var-docs/?sel=Visit');
+    window.history.replaceState(null, '', '/bdchm-explorer/?sel=Visit');
     await startTour();
 
     for (let i = 0; i < 12 && (sel() ?? '') === 'Visit'; i++) next();
