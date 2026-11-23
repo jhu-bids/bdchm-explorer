@@ -24,8 +24,8 @@
       "prefix_prefix": "VBO",
       "prefix_reference": "http://purl.obolibrary.org/obo/VBO_"
     },
-    "NCBITaxon": {
-      "prefix_prefix": "NCBITaxon",
+    "ncbitaxon": {
+      "prefix_prefix": "ncbitaxon",
       "prefix_reference": "http://purl.obolibrary.org/obo/NCBITaxon_"
     },
     "MONDO": {
@@ -40,8 +40,8 @@
       "prefix_prefix": "rxnorm",
       "prefix_reference": "https://bioregistry.io/rxnorm:/"
     },
-    "UCUM": {
-      "prefix_prefix": "UCUM",
+    "UOM": {
+      "prefix_prefix": "UOM",
       "prefix_reference": "https://units-of-measurement.org/"
     },
     "OBA": {
@@ -50,7 +50,7 @@
     },
     "ICD10CM": {
       "prefix_prefix": "ICD10CM",
-      "prefix_reference": "https://icd.codes/icd10cm/"
+      "prefix_reference": "http://purl.bioontology.org/ontology/ICD10CM/"
     },
     "MMO": {
       "prefix_prefix": "MMO",
@@ -58,7 +58,7 @@
     },
     "BAO": {
       "prefix_prefix": "BAO",
-      "prefix_reference": "http://identifiers.org/bao/"
+      "prefix_reference": "http://www.bioassayontology.org/bao#BAO_"
     },
     "UBERON": {
       "prefix_prefix": "UBERON",
@@ -74,7 +74,7 @@
     },
     "EFO": {
       "prefix_prefix": "EFO",
-      "prefix_reference": "http://identifiers.org/efo/"
+      "prefix_reference": "http://www.ebi.ac.uk/efo/EFO_"
     }
   },
   "classes": {
@@ -347,7 +347,7 @@
     "TimePoint": {
       "id": "TimePoint",
       "name": "TimePoint",
-      "parent": null,
+      "parent": "Entity",
       "abstract": false,
       "slots": [
         {
@@ -361,6 +361,10 @@
         },
         {
           "id": "event_type"
+        },
+        {
+          "id": "id-TimePoint",
+          "inherited_from": "Entity"
         }
       ],
       "description": "A structured representation of a single point in time that allows direct/explicit declaration as a dateTime, specification in terms of offset from a defined index, or description of an event type as a proxy for the time point when it occurred."
@@ -368,7 +372,7 @@
     "TimePeriod": {
       "id": "TimePeriod",
       "name": "TimePeriod",
-      "parent": null,
+      "parent": "Entity",
       "abstract": false,
       "slots": [
         {
@@ -376,6 +380,10 @@
         },
         {
           "id": "period_end"
+        },
+        {
+          "id": "id-TimePeriod",
+          "inherited_from": "Entity"
         }
       ],
       "description": "A period of time between a start and end time point."
@@ -1939,7 +1947,7 @@
     "CauseOfDeath": {
       "id": "CauseOfDeath",
       "name": "CauseOfDeath",
-      "parent": null,
+      "parent": "Entity",
       "abstract": false,
       "slots": [
         {
@@ -1947,6 +1955,10 @@
         },
         {
           "id": "order"
+        },
+        {
+          "id": "id-CauseOfDeath",
+          "inherited_from": "Entity"
         }
       ],
       "description": "A class / complex datatype for handling both values and ordinality for causes of death."
@@ -1982,7 +1994,7 @@
     "Context": {
       "id": "Context",
       "name": "Context",
-      "parent": null,
+      "parent": "Entity",
       "abstract": false,
       "slots": [
         {
@@ -1990,6 +2002,10 @@
         },
         {
           "id": "relative_timing"
+        },
+        {
+          "id": "id-Context",
+          "inherited_from": "Entity"
         }
       ],
       "description": "The context within which an observation was made."
@@ -1997,7 +2013,7 @@
     "Activity": {
       "id": "Activity",
       "name": "Activity",
-      "parent": null,
+      "parent": "Entity",
       "abstract": false,
       "slots": [
         {
@@ -2005,6 +2021,10 @@
         },
         {
           "id": "time_duration"
+        },
+        {
+          "id": "id-Activity",
+          "inherited_from": "Entity"
         }
       ],
       "description": "An activity that provides context to an observation."
@@ -2551,6 +2571,18 @@
       "required": false,
       "alias": "event_type"
     },
+    "id-TimePoint": {
+      "id": "id-TimePoint",
+      "name": "id",
+      "range": "uriorcurie",
+      "description": "The 'logical' identifier of the entity within the system of record.  The simple value of this attribute stands for an identifier of this data object within the system, it can be used as a reference from other objects within the same system (i.e. primary and foreign keys), and it should be unique per type of object. The same data object copied to a different system will likely have a different \"id\" in the new system since \"id\" values are system specific and do not represent persistent business identifiers. Business identifiers are assigned outside the information system and are captured in the \"identifier\" field. The \"id\" field is more likely to be a serially or randomly generated value that is assigned to the data object as it is created in a system.",
+      "required": true,
+      "identifier": true,
+      "slot_uri": "schema:identifier",
+      "alias": "id",
+      "global": true,
+      "slot_url": "http://schema.org/identifier"
+    },
     "period_start": {
       "id": "period_start",
       "name": "period_start",
@@ -2567,11 +2599,22 @@
       "required": false,
       "alias": "period_end"
     },
+    "id-TimePeriod": {
+      "id": "id-TimePeriod",
+      "name": "id",
+      "range": "uriorcurie",
+      "description": "The 'logical' identifier of the entity within the system of record.  The simple value of this attribute stands for an identifier of this data object within the system, it can be used as a reference from other objects within the same system (i.e. primary and foreign keys), and it should be unique per type of object. The same data object copied to a different system will likely have a different \"id\" in the new system since \"id\" values are system specific and do not represent persistent business identifiers. Business identifiers are assigned outside the information system and are captured in the \"identifier\" field. The \"id\" field is more likely to be a serially or randomly generated value that is assigned to the data object as it is created in a system.",
+      "required": true,
+      "identifier": true,
+      "slot_uri": "schema:identifier",
+      "alias": "id",
+      "global": true,
+      "slot_url": "http://schema.org/identifier"
+    },
     "entries": {
       "id": "entries",
       "name": "entries",
       "range": "ResearchStudy",
-      "description": "The ResearchStudy records held by this collection.",
       "required": true,
       "multivalued": true,
       "inlined": true,
@@ -2766,7 +2809,6 @@
       "id": "response_value",
       "name": "response_value",
       "range": "QuestionnaireResponseValue",
-      "description": "The value captured for this questionnaire response item.",
       "required": true,
       "alias": "response_value"
     },
@@ -3586,7 +3628,6 @@
       "description": "A set of one or more observations.",
       "required": true,
       "multivalued": true,
-      "inlined_as_list": true,
       "alias": "observations",
       "global": true
     },
@@ -5006,8 +5047,6 @@
       "description": "A set of one or more observations.",
       "required": true,
       "multivalued": true,
-      "inlined": true,
-      "inlined_as_list": true,
       "alias": "observations",
       "global": true
     },
@@ -5128,8 +5167,6 @@
       "description": "A set of one or more observations.",
       "required": true,
       "multivalued": true,
-      "inlined": true,
-      "inlined_as_list": true,
       "alias": "observations",
       "global": true
     },
@@ -5435,8 +5472,6 @@
       "description": "A set of one or more observations.",
       "required": true,
       "multivalued": true,
-      "inlined": true,
-      "inlined_as_list": true,
       "alias": "observations",
       "global": true
     },
@@ -5608,6 +5643,18 @@
       "multivalued": false,
       "alias": "order"
     },
+    "id-CauseOfDeath": {
+      "id": "id-CauseOfDeath",
+      "name": "id",
+      "range": "uriorcurie",
+      "description": "The 'logical' identifier of the entity within the system of record.  The simple value of this attribute stands for an identifier of this data object within the system, it can be used as a reference from other objects within the same system (i.e. primary and foreign keys), and it should be unique per type of object. The same data object copied to a different system will likely have a different \"id\" in the new system since \"id\" values are system specific and do not represent persistent business identifiers. Business identifiers are assigned outside the information system and are captured in the \"identifier\" field. The \"id\" field is more likely to be a serially or randomly generated value that is assigned to the data object as it is created in a system.",
+      "required": true,
+      "identifier": true,
+      "slot_uri": "schema:identifier",
+      "alias": "id",
+      "global": true,
+      "slot_url": "http://schema.org/identifier"
+    },
     "method": {
       "id": "method",
       "name": "method",
@@ -5671,6 +5718,18 @@
       "description": "The timing of the observation relative to the observation (e.g., \"before\", \"concurrent with\")",
       "alias": "relative_timing"
     },
+    "id-Context": {
+      "id": "id-Context",
+      "name": "id",
+      "range": "uriorcurie",
+      "description": "The 'logical' identifier of the entity within the system of record.  The simple value of this attribute stands for an identifier of this data object within the system, it can be used as a reference from other objects within the same system (i.e. primary and foreign keys), and it should be unique per type of object. The same data object copied to a different system will likely have a different \"id\" in the new system since \"id\" values are system specific and do not represent persistent business identifiers. Business identifiers are assigned outside the information system and are captured in the \"identifier\" field. The \"id\" field is more likely to be a serially or randomly generated value that is assigned to the data object as it is created in a system.",
+      "required": true,
+      "identifier": true,
+      "slot_uri": "schema:identifier",
+      "alias": "id",
+      "global": true,
+      "slot_url": "http://schema.org/identifier"
+    },
     "activity_type-Activity": {
       "id": "activity_type-Activity",
       "name": "activity_type",
@@ -5684,6 +5743,18 @@
       "range": "Quantity",
       "description": "The quantity of time over which the activity occurred (e.g. \"8 hours\", \"1 week\")",
       "alias": "time_duration"
+    },
+    "id-Activity": {
+      "id": "id-Activity",
+      "name": "id",
+      "range": "uriorcurie",
+      "description": "The 'logical' identifier of the entity within the system of record.  The simple value of this attribute stands for an identifier of this data object within the system, it can be used as a reference from other objects within the same system (i.e. primary and foreign keys), and it should be unique per type of object. The same data object copied to a different system will likely have a different \"id\" in the new system since \"id\" values are system specific and do not represent persistent business identifiers. Business identifiers are assigned outside the information system and are captured in the \"identifier\" field. The \"id\" field is more likely to be a serially or randomly generated value that is assigned to the data object as it is created in a system.",
+      "required": true,
+      "identifier": true,
+      "slot_uri": "schema:identifier",
+      "alias": "id",
+      "global": true,
+      "slot_url": "http://schema.org/identifier"
     }
   },
   "enums": {
@@ -5849,8 +5920,8 @@
       "name": "EthnicityEnum",
       "description": "A constrained set of enumerative values containing the United States Office of Management and Budget (OMB) values for ethnicity.",
       "permissible_values": {
-        "OMOP:38003563": {
-          "text": "OMOP:38003563",
+        "HISPANIC_OR_LATINO": {
+          "text": "HISPANIC_OR_LATINO",
           "description": "A person of Cuban, Mexican, Puerto Rican, South or Central American, or other Spanish culture or origin, regardless of race. The term, \"Spanish origin\" can be used in addition to \"Hispanic or Latino\". (OMB)",
           "meaning": "OMOP:38003563",
           "instantiates": [],
@@ -5859,7 +5930,6 @@
           "extensions": {},
           "annotations": {},
           "alt_descriptions": {},
-          "title": "HISPANIC_OR_LATINO",
           "todos": [],
           "notes": [],
           "comments": [],
@@ -5879,8 +5949,8 @@
           "keywords": [],
           "meaning_url": "https://athena.ohdsi.org/search-terms/terms/38003563"
         },
-        "OMOP:38003564": {
-          "text": "OMOP:38003564",
+        "NOT_HISPANIC_OR_LATINO": {
+          "text": "NOT_HISPANIC_OR_LATINO",
           "description": "A person not of Cuban, Mexican, Puerto Rican, South or Central American, or other Spanish culture or origin, regardless of race.",
           "meaning": "OMOP:38003564",
           "instantiates": [],
@@ -5889,7 +5959,6 @@
           "extensions": {},
           "annotations": {},
           "alt_descriptions": {},
-          "title": "NOT_HISPANIC_OR_LATINO",
           "todos": [],
           "notes": [],
           "comments": [],
@@ -5909,17 +5978,16 @@
           "keywords": [],
           "meaning_url": "https://athena.ohdsi.org/search-terms/terms/38003564"
         },
-        "OMOP:45877986": {
-          "text": "OMOP:45877986",
+        "UNKNOWN": {
+          "text": "UNKNOWN",
           "description": "Not known, not observed, not recorded, or refused.",
-          "meaning": "OMOP:45877986",
+          "meaning": "OMOP:8552",
           "instantiates": [],
           "implements": [],
           "mixins": [],
           "extensions": {},
           "annotations": {},
           "alt_descriptions": {},
-          "title": "UNKNOWN",
           "todos": [],
           "notes": [],
           "comments": [],
@@ -5937,7 +6005,7 @@
           "contributors": [],
           "categories": [],
           "keywords": [],
-          "meaning_url": "https://athena.ohdsi.org/search-terms/terms/45877986"
+          "meaning_url": "https://athena.ohdsi.org/search-terms/terms/8552"
         }
       }
     },
@@ -5946,8 +6014,8 @@
       "name": "RaceEnum",
       "description": "A constrained set of enumerative values containing the United States Office of Management and Budget (OMB) values for race.",
       "permissible_values": {
-        "OMOP:8657": {
-          "text": "OMOP:8657",
+        "AMERICAN_INDIAN_OR_ALASKA_NATIVE": {
+          "text": "AMERICAN_INDIAN_OR_ALASKA_NATIVE",
           "description": "A person having origins in any of the original peoples of North and South America (including Central America) and who maintains tribal affiliation or community attachment. (OMB)",
           "meaning": "OMOP:8657",
           "instantiates": [],
@@ -5956,7 +6024,6 @@
           "extensions": {},
           "annotations": {},
           "alt_descriptions": {},
-          "title": "AMERICAN_INDIAN_OR_ALASKA_NATIVE",
           "todos": [],
           "notes": [],
           "comments": [],
@@ -5976,8 +6043,8 @@
           "keywords": [],
           "meaning_url": "https://athena.ohdsi.org/search-terms/terms/8657"
         },
-        "OMOP:8515": {
-          "text": "OMOP:8515",
+        "ASIAN": {
+          "text": "ASIAN",
           "description": "A person having origins in any of the original peoples of the Far East, Southeast Asia, or the Indian subcontinent, including for example, Cambodia, China, India, Japan, Korea, Malaysia, Pakistan, the Philippine Islands, Thailand, and Vietnam. (OMB)",
           "meaning": "OMOP:8515",
           "instantiates": [],
@@ -5986,7 +6053,6 @@
           "extensions": {},
           "annotations": {},
           "alt_descriptions": {},
-          "title": "ASIAN",
           "todos": [],
           "notes": [],
           "comments": [],
@@ -6006,8 +6072,8 @@
           "keywords": [],
           "meaning_url": "https://athena.ohdsi.org/search-terms/terms/8515"
         },
-        "OMOP:8516": {
-          "text": "OMOP:8516",
+        "BLACK_OR_AFRICAN_AMERICAN": {
+          "text": "BLACK_OR_AFRICAN_AMERICAN",
           "description": "A person having origins in any of the Black racial groups of Africa. Terms such as \"Haitian\" or \"Negro\" can be used in addition to \"Black or African American\". (OMB)",
           "meaning": "OMOP:8516",
           "instantiates": [],
@@ -6016,7 +6082,6 @@
           "extensions": {},
           "annotations": {},
           "alt_descriptions": {},
-          "title": "BLACK_OR_AFRICAN_AMERICAN",
           "todos": [],
           "notes": [],
           "comments": [],
@@ -6036,8 +6101,8 @@
           "keywords": [],
           "meaning_url": "https://athena.ohdsi.org/search-terms/terms/8516"
         },
-        "OMOP:38003615": {
-          "text": "OMOP:38003615",
+        "MIDDLE_EASTERN_OR_NORTH_AFRICAN": {
+          "text": "MIDDLE_EASTERN_OR_NORTH_AFRICAN",
           "description": "A person having origins in any of the original peoples of the Middle East or North Africa, including, for example, Lebanese, Iranian, Egyptian, Syrian, Iraqi, and Israeli. (OMB)",
           "meaning": "OMOP:38003615",
           "instantiates": [],
@@ -6046,7 +6111,6 @@
           "extensions": {},
           "annotations": {},
           "alt_descriptions": {},
-          "title": "MIDDLE_EASTERN_OR_NORTH_AFRICAN",
           "todos": [],
           "notes": [],
           "comments": [],
@@ -6066,8 +6130,8 @@
           "keywords": [],
           "meaning_url": "https://athena.ohdsi.org/search-terms/terms/38003615"
         },
-        "OMOP:8557": {
-          "text": "OMOP:8557",
+        "NATIVE_HAWAIIAN_OR_OTHER_PACIFIC_ISLANDER": {
+          "text": "NATIVE_HAWAIIAN_OR_OTHER_PACIFIC_ISLANDER",
           "description": "Denotes a person having origins in any of the original peoples of Hawaii, Guam, Samoa, or other Pacific Islands. The term covers particularly people who identify themselves as part-Hawaiian, Native Hawaiian, Guamanian or Chamorro, Carolinian, Samoan, Chuukese (Trukese), Fijian, Kosraean, Melanesian, Micronesian, Northern Mariana Islander, Palauan, Papua New Guinean, Pohnpeian, Polynesian, Solomon Islander, Tahitian, Tokelauan, Tongan, Yapese, or Pacific Islander, not specified.",
           "meaning": "OMOP:8557",
           "instantiates": [],
@@ -6076,7 +6140,6 @@
           "extensions": {},
           "annotations": {},
           "alt_descriptions": {},
-          "title": "NATIVE_HAWAIIAN_OR_OTHER_PACIFIC_ISLANDER",
           "todos": [],
           "notes": [],
           "comments": [],
@@ -6096,17 +6159,16 @@
           "keywords": [],
           "meaning_url": "https://athena.ohdsi.org/search-terms/terms/8557"
         },
-        "OMOP:45877986": {
-          "text": "OMOP:45877986",
+        "UNKNOWN": {
+          "text": "UNKNOWN",
           "description": "Not known, not observed, not recorded, or refused.",
-          "meaning": "OMOP:45877986",
+          "meaning": "OMOP:8552",
           "instantiates": [],
           "implements": [],
           "mixins": [],
           "extensions": {},
           "annotations": {},
           "alt_descriptions": {},
-          "title": "UNKNOWN",
           "todos": [],
           "notes": [],
           "comments": [],
@@ -6124,10 +6186,10 @@
           "contributors": [],
           "categories": [],
           "keywords": [],
-          "meaning_url": "https://athena.ohdsi.org/search-terms/terms/45877986"
+          "meaning_url": "https://athena.ohdsi.org/search-terms/terms/8552"
         },
-        "OMOP:8527": {
-          "text": "OMOP:8527",
+        "WHITE": {
+          "text": "WHITE",
           "description": "Denotes person with European, Middle Eastern, or North African ancestral origin who identifies, or is identified, as White.",
           "meaning": "OMOP:8527",
           "instantiates": [],
@@ -6136,7 +6198,6 @@
           "extensions": {},
           "annotations": {},
           "alt_descriptions": {},
-          "title": "WHITE",
           "todos": [],
           "notes": [],
           "comments": [],
@@ -6156,8 +6217,8 @@
           "keywords": [],
           "meaning_url": "https://athena.ohdsi.org/search-terms/terms/8527"
         },
-        "OMOP:45880900": {
-          "text": "OMOP:45880900",
+        "MORE_THAN_ONE_RACE": {
+          "text": "MORE_THAN_ONE_RACE",
           "description": "A person having more than one race.",
           "meaning": "OMOP:45880900",
           "instantiates": [],
@@ -6166,7 +6227,6 @@
           "extensions": {},
           "annotations": {},
           "alt_descriptions": {},
-          "title": "MORE_THAN_ONE_RACE",
           "todos": [],
           "notes": [],
           "comments": [],
@@ -6193,8 +6253,8 @@
       "name": "SexEnum",
       "description": "A constrained set of enumerative values containing the OMOP values for sex.",
       "permissible_values": {
-        "OMOP:8507": {
-          "text": "OMOP:8507",
+        "MALE": {
+          "text": "MALE",
           "description": "A person who belongs to the sex that normally produces sperm.",
           "meaning": "OMOP:8507",
           "instantiates": [],
@@ -6203,7 +6263,6 @@
           "extensions": {},
           "annotations": {},
           "alt_descriptions": {},
-          "title": "MALE",
           "todos": [],
           "notes": [],
           "comments": [],
@@ -6223,8 +6282,8 @@
           "keywords": [],
           "meaning_url": "https://athena.ohdsi.org/search-terms/terms/8507"
         },
-        "OMOP:8532": {
-          "text": "OMOP:8532",
+        "FEMALE": {
+          "text": "FEMALE",
           "description": "A person who belongs to the sex that normally produces ova.",
           "meaning": "OMOP:8532",
           "instantiates": [],
@@ -6233,7 +6292,6 @@
           "extensions": {},
           "annotations": {},
           "alt_descriptions": {},
-          "title": "FEMALE",
           "todos": [],
           "notes": [],
           "comments": [],
@@ -6253,17 +6311,16 @@
           "keywords": [],
           "meaning_url": "https://athena.ohdsi.org/search-terms/terms/8532"
         },
-        "OMOP:45877986": {
-          "text": "OMOP:45877986",
+        "UNKNOWN": {
+          "text": "UNKNOWN",
           "description": "Not known, not observed, not recorded, or refused.",
-          "meaning": "OMOP:45877986",
+          "meaning": "OMOP:8552",
           "instantiates": [],
           "implements": [],
           "mixins": [],
           "extensions": {},
           "annotations": {},
           "alt_descriptions": {},
-          "title": "UNKNOWN",
           "todos": [],
           "notes": [],
           "comments": [],
@@ -6281,7 +6338,7 @@
           "contributors": [],
           "categories": [],
           "keywords": [],
-          "meaning_url": "https://athena.ohdsi.org/search-terms/terms/45877986"
+          "meaning_url": "https://athena.ohdsi.org/search-terms/terms/8552"
         }
       }
     },
@@ -6293,7 +6350,7 @@
         "source_ontology": "obo:ncbitaxon",
         "include_self": false,
         "source_nodes": [
-          "NCBITaxon:131567"
+          "ncbitaxon:131567"
         ],
         "source_nodes_urls": [
           "http://purl.obolibrary.org/obo/NCBITaxon_131567"
@@ -6332,7 +6389,7 @@
           "BAO:0003118"
         ],
         "source_nodes_urls": [
-          "http://identifiers.org/bao/0003118"
+          "http://www.bioassayontology.org/bao#BAO_0003118"
         ],
         "relationship_types": [
           "rdfs:subClassOf"
@@ -6344,8 +6401,8 @@
       "name": "VitalStatusEnum",
       "description": "A constrained set of enumerative values containing the OMOP values for vital status.",
       "permissible_values": {
-        "OMOP:4230556": {
-          "text": "OMOP:4230556",
+        "ALIVE": {
+          "text": "ALIVE",
           "description": "Showing characteristics of life; displaying signs of life. (NCIt)",
           "meaning": "OMOP:4230556",
           "instantiates": [],
@@ -6354,7 +6411,6 @@
           "extensions": {},
           "annotations": {},
           "alt_descriptions": {},
-          "title": "ALIVE",
           "todos": [],
           "notes": [],
           "comments": [],
@@ -6374,8 +6430,8 @@
           "keywords": [],
           "meaning_url": "https://athena.ohdsi.org/search-terms/terms/4230556"
         },
-        "OMOP:434489": {
-          "text": "OMOP:434489",
+        "DEAD": {
+          "text": "DEAD",
           "description": "The cessation of life. (NCIt)",
           "meaning": "OMOP:434489",
           "instantiates": [],
@@ -6384,7 +6440,6 @@
           "extensions": {},
           "annotations": {},
           "alt_descriptions": {},
-          "title": "DEAD",
           "todos": [],
           "notes": [],
           "comments": [],
@@ -9403,81 +9458,13 @@
         ]
       }
     },
-    "CustomConditionConceptEnum": {
-      "id": "CustomConditionConceptEnum",
-      "name": "CustomConditionConceptEnum",
-      "description": "A constrained set of custom enumerative values for conditions not present in HPO or MONDO.",
-      "permissible_values": {
-        "OMOP:4102124": {
-          "text": "OMOP:4102124",
-          "description": "Carotid plaque",
-          "meaning": "OMOP:4102124",
-          "instantiates": [],
-          "implements": [],
-          "mixins": [],
-          "extensions": {},
-          "annotations": {},
-          "alt_descriptions": {},
-          "title": "Carotid plaque",
-          "todos": [],
-          "notes": [],
-          "comments": [],
-          "examples": [],
-          "in_subset": [],
-          "see_also": [],
-          "aliases": [],
-          "structured_aliases": {},
-          "mappings": [],
-          "exact_mappings": [],
-          "close_mappings": [],
-          "related_mappings": [],
-          "narrow_mappings": [],
-          "broad_mappings": [],
-          "contributors": [],
-          "categories": [],
-          "keywords": [],
-          "meaning_url": "https://athena.ohdsi.org/search-terms/terms/4102124"
-        },
-        "OMOP:37472817": {
-          "text": "OMOP:37472817",
-          "description": "Interstitial lung abnormality",
-          "meaning": "OMOP:37472817",
-          "instantiates": [],
-          "implements": [],
-          "mixins": [],
-          "extensions": {},
-          "annotations": {},
-          "alt_descriptions": {},
-          "title": "Interstitial lung abnormality",
-          "todos": [],
-          "notes": [],
-          "comments": [],
-          "examples": [],
-          "in_subset": [],
-          "see_also": [],
-          "aliases": [],
-          "structured_aliases": {},
-          "mappings": [],
-          "exact_mappings": [],
-          "close_mappings": [],
-          "related_mappings": [],
-          "narrow_mappings": [],
-          "broad_mappings": [],
-          "contributors": [],
-          "categories": [],
-          "keywords": [],
-          "meaning_url": "https://athena.ohdsi.org/search-terms/terms/37472817"
-        }
-      }
-    },
     "ConditionConceptEnum": {
       "id": "ConditionConceptEnum",
       "name": "ConditionConceptEnum",
-      "description": "A constrained set of enumerative values containing the MONDO values for human diseases, the HPO values for phenotypic abnormalities, and the custom condition concepts.",
+      "description": "A constrained set of enumerative values containing both the MONDO values for human diseases and the HPO values for phenotypic abnormalities.",
       "inherits": [
-        "CustomConditionConceptEnum",
-        "HpoPhenotypicAbnormalityEnum",
-        "MondoHumanDiseaseEnum"
+        "MondoHumanDiseaseEnum",
+        "HpoPhenotypicAbnormalityEnum"
       ]
     },
     "ProvenanceEnum": {
@@ -12892,8 +12879,8 @@
         "OMOP contains 165 standard values; `select * from concept where domain_id = 'Route' and invalid_reason is null and standard_concept is not null;` from SNOMED. Do we need descriptions beyond the name?"
       ],
       "permissible_values": {
-        "OMOP:44783786": {
-          "text": "OMOP:44783786",
+        "ARTERIOVENOUS_FISTULA": {
+          "text": "ARTERIOVENOUS_FISTULA",
           "description": "Arteriovenous fistula",
           "meaning": "OMOP:44783786",
           "instantiates": [],
@@ -12902,7 +12889,6 @@
           "extensions": {},
           "annotations": {},
           "alt_descriptions": {},
-          "title": "ARTERIOVENOUS_FISTULA",
           "todos": [],
           "notes": [],
           "comments": [],
@@ -12922,8 +12908,8 @@
           "keywords": [],
           "meaning_url": "https://athena.ohdsi.org/search-terms/terms/44783786"
         },
-        "OMOP:44801748": {
-          "text": "OMOP:44801748",
+        "HAEMODIAFILTRATION": {
+          "text": "HAEMODIAFILTRATION",
           "description": "Haemodiafiltration",
           "meaning": "OMOP:44801748",
           "instantiates": [],
@@ -12932,7 +12918,6 @@
           "extensions": {},
           "annotations": {},
           "alt_descriptions": {},
-          "title": "HAEMODIAFILTRATION",
           "todos": [],
           "notes": [],
           "comments": [],
@@ -12952,8 +12937,8 @@
           "keywords": [],
           "meaning_url": "https://athena.ohdsi.org/search-terms/terms/44801748"
         },
-        "OMOP:46270168": {
-          "text": "OMOP:46270168",
+        "SUBLESIONAL": {
+          "text": "SUBLESIONAL",
           "description": "Sublesional",
           "meaning": "OMOP:46270168",
           "instantiates": [],
@@ -12962,7 +12947,6 @@
           "extensions": {},
           "annotations": {},
           "alt_descriptions": {},
-          "title": "SUBLESIONAL",
           "todos": [],
           "notes": [],
           "comments": [],
@@ -12982,8 +12966,8 @@
           "keywords": [],
           "meaning_url": "https://athena.ohdsi.org/search-terms/terms/46270168"
         },
-        "OMOP:46272911": {
-          "text": "OMOP:46272911",
+        "INTRANEURAL": {
+          "text": "INTRANEURAL",
           "description": "Intraneural",
           "meaning": "OMOP:46272911",
           "instantiates": [],
@@ -12992,7 +12976,6 @@
           "extensions": {},
           "annotations": {},
           "alt_descriptions": {},
-          "title": "INTRANEURAL",
           "todos": [],
           "notes": [],
           "comments": [],
@@ -13012,8 +12995,8 @@
           "keywords": [],
           "meaning_url": "https://athena.ohdsi.org/search-terms/terms/46272911"
         },
-        "OMOP:46272926": {
-          "text": "OMOP:46272926",
+        "INTRAMURAL": {
+          "text": "INTRAMURAL",
           "description": "Intramural",
           "meaning": "OMOP:46272926",
           "instantiates": [],
@@ -13022,7 +13005,6 @@
           "extensions": {},
           "annotations": {},
           "alt_descriptions": {},
-          "title": "INTRAMURAL",
           "todos": [],
           "notes": [],
           "comments": [],
@@ -13042,8 +13024,8 @@
           "keywords": [],
           "meaning_url": "https://athena.ohdsi.org/search-terms/terms/46272926"
         },
-        "OMOP:605428": {
-          "text": "OMOP:605428",
+        "INTRACATHETER_INSTILLATION": {
+          "text": "INTRACATHETER_INSTILLATION",
           "description": "Intracatheter instillation",
           "meaning": "OMOP:605428",
           "instantiates": [],
@@ -13052,7 +13034,6 @@
           "extensions": {},
           "annotations": {},
           "alt_descriptions": {},
-          "title": "INTRACATHETER_INSTILLATION",
           "todos": [],
           "notes": [],
           "comments": [],
@@ -13072,8 +13053,8 @@
           "keywords": [],
           "meaning_url": "https://athena.ohdsi.org/search-terms/terms/605428"
         },
-        "OMOP:600817": {
-          "text": "OMOP:600817",
+        "SUBLABIAL": {
+          "text": "SUBLABIAL",
           "description": "Sublabial",
           "meaning": "OMOP:600817",
           "instantiates": [],
@@ -13082,7 +13063,6 @@
           "extensions": {},
           "annotations": {},
           "alt_descriptions": {},
-          "title": "SUBLABIAL",
           "todos": [],
           "notes": [],
           "comments": [],
@@ -13102,8 +13082,8 @@
           "keywords": [],
           "meaning_url": "https://athena.ohdsi.org/search-terms/terms/600817"
         },
-        "OMOP:4006860": {
-          "text": "OMOP:4006860",
+        "INTRA_ARTICULAR": {
+          "text": "INTRA_ARTICULAR",
           "description": "Intra-articular",
           "meaning": "OMOP:4006860",
           "instantiates": [],
@@ -13112,7 +13092,6 @@
           "extensions": {},
           "annotations": {},
           "alt_descriptions": {},
-          "title": "INTRA_ARTICULAR",
           "todos": [],
           "notes": [],
           "comments": [],
@@ -13132,8 +13111,8 @@
           "keywords": [],
           "meaning_url": "https://athena.ohdsi.org/search-terms/terms/4006860"
         },
-        "OMOP:618805": {
-          "text": "OMOP:618805",
+        "INTRADIALYTIC": {
+          "text": "INTRADIALYTIC",
           "description": "Intradialytic",
           "meaning": "OMOP:618805",
           "instantiates": [],
@@ -13142,7 +13121,6 @@
           "extensions": {},
           "annotations": {},
           "alt_descriptions": {},
-          "title": "INTRADIALYTIC",
           "todos": [],
           "notes": [],
           "comments": [],
@@ -13162,8 +13140,8 @@
           "keywords": [],
           "meaning_url": "https://athena.ohdsi.org/search-terms/terms/618805"
         },
-        "OMOP:762840": {
-          "text": "OMOP:762840",
+        "ARTERIOVENOUS_GRAFT": {
+          "text": "ARTERIOVENOUS_GRAFT",
           "description": "Arteriovenous graft",
           "meaning": "OMOP:762840",
           "instantiates": [],
@@ -13172,7 +13150,6 @@
           "extensions": {},
           "annotations": {},
           "alt_descriptions": {},
-          "title": "ARTERIOVENOUS_GRAFT",
           "todos": [],
           "notes": [],
           "comments": [],
@@ -13192,8 +13169,8 @@
           "keywords": [],
           "meaning_url": "https://athena.ohdsi.org/search-terms/terms/762840"
         },
-        "OMOP:4023156": {
-          "text": "OMOP:4023156",
+        "OTIC": {
+          "text": "OTIC",
           "description": "Otic",
           "meaning": "OMOP:4023156",
           "instantiates": [],
@@ -13202,7 +13179,6 @@
           "extensions": {},
           "annotations": {},
           "alt_descriptions": {},
-          "title": "OTIC",
           "todos": [],
           "notes": [],
           "comments": [],
@@ -13222,8 +13198,8 @@
           "keywords": [],
           "meaning_url": "https://athena.ohdsi.org/search-terms/terms/4023156"
         },
-        "OMOP:4132161": {
-          "text": "OMOP:4132161",
+        "ORAL": {
+          "text": "ORAL",
           "description": "Oral",
           "meaning": "OMOP:4132161",
           "instantiates": [],
@@ -13232,7 +13208,6 @@
           "extensions": {},
           "annotations": {},
           "alt_descriptions": {},
-          "title": "ORAL",
           "todos": [],
           "notes": [],
           "comments": [],
@@ -13252,8 +13227,8 @@
           "keywords": [],
           "meaning_url": "https://athena.ohdsi.org/search-terms/terms/4132161"
         },
-        "OMOP:4057765": {
-          "text": "OMOP:4057765",
+        "VAGINAL": {
+          "text": "VAGINAL",
           "description": "Vaginal",
           "meaning": "OMOP:4057765",
           "instantiates": [],
@@ -13262,7 +13237,6 @@
           "extensions": {},
           "annotations": {},
           "alt_descriptions": {},
-          "title": "VAGINAL",
           "todos": [],
           "notes": [],
           "comments": [],
@@ -13282,8 +13256,8 @@
           "keywords": [],
           "meaning_url": "https://athena.ohdsi.org/search-terms/terms/4057765"
         },
-        "OMOP:4106215": {
-          "text": "OMOP:4106215",
+        "ROUTE_OF_ADMINISTRATION_VALUE": {
+          "text": "ROUTE_OF_ADMINISTRATION_VALUE",
           "description": "Route of administration value",
           "meaning": "OMOP:4106215",
           "instantiates": [],
@@ -13292,7 +13266,6 @@
           "extensions": {},
           "annotations": {},
           "alt_descriptions": {},
-          "title": "ROUTE_OF_ADMINISTRATION_VALUE",
           "todos": [],
           "notes": [],
           "comments": [],
@@ -13312,8 +13285,8 @@
           "keywords": [],
           "meaning_url": "https://athena.ohdsi.org/search-terms/terms/4106215"
         },
-        "OMOP:4132254": {
-          "text": "OMOP:4132254",
+        "GASTROSTOMY": {
+          "text": "GASTROSTOMY",
           "description": "Gastrostomy",
           "meaning": "OMOP:4132254",
           "instantiates": [],
@@ -13322,7 +13295,6 @@
           "extensions": {},
           "annotations": {},
           "alt_descriptions": {},
-          "title": "GASTROSTOMY",
           "todos": [],
           "notes": [],
           "comments": [],
@@ -13342,8 +13314,8 @@
           "keywords": [],
           "meaning_url": "https://athena.ohdsi.org/search-terms/terms/4132254"
         },
-        "OMOP:4132711": {
-          "text": "OMOP:4132711",
+        "NASOGASTRIC": {
+          "text": "NASOGASTRIC",
           "description": "Nasogastric",
           "meaning": "OMOP:4132711",
           "instantiates": [],
@@ -13352,7 +13324,6 @@
           "extensions": {},
           "annotations": {},
           "alt_descriptions": {},
-          "title": "NASOGASTRIC",
           "todos": [],
           "notes": [],
           "comments": [],
@@ -13372,8 +13343,8 @@
           "keywords": [],
           "meaning_url": "https://athena.ohdsi.org/search-terms/terms/4132711"
         },
-        "OMOP:4133177": {
-          "text": "OMOP:4133177",
+        "JEJUNOSTOMY": {
+          "text": "JEJUNOSTOMY",
           "description": "Jejunostomy",
           "meaning": "OMOP:4133177",
           "instantiates": [],
@@ -13382,7 +13353,6 @@
           "extensions": {},
           "annotations": {},
           "alt_descriptions": {},
-          "title": "JEJUNOSTOMY",
           "todos": [],
           "notes": [],
           "comments": [],
@@ -13402,8 +13372,8 @@
           "keywords": [],
           "meaning_url": "https://athena.ohdsi.org/search-terms/terms/4133177"
         },
-        "OMOP:4142048": {
-          "text": "OMOP:4142048",
+        "SUBCUTANEOUS": {
+          "text": "SUBCUTANEOUS",
           "description": "Subcutaneous",
           "meaning": "OMOP:4142048",
           "instantiates": [],
@@ -13412,7 +13382,6 @@
           "extensions": {},
           "annotations": {},
           "alt_descriptions": {},
-          "title": "SUBCUTANEOUS",
           "todos": [],
           "notes": [],
           "comments": [],
@@ -13432,8 +13401,8 @@
           "keywords": [],
           "meaning_url": "https://athena.ohdsi.org/search-terms/terms/4142048"
         },
-        "OMOP:4156704": {
-          "text": "OMOP:4156704",
+        "GINGIVAL": {
+          "text": "GINGIVAL",
           "description": "Gingival",
           "meaning": "OMOP:4156704",
           "instantiates": [],
@@ -13442,7 +13411,6 @@
           "extensions": {},
           "annotations": {},
           "alt_descriptions": {},
-          "title": "GINGIVAL",
           "todos": [],
           "notes": [],
           "comments": [],
@@ -13462,8 +13430,8 @@
           "keywords": [],
           "meaning_url": "https://athena.ohdsi.org/search-terms/terms/4156704"
         },
-        "OMOP:4156705": {
-          "text": "OMOP:4156705",
+        "INTRACARDIAC": {
+          "text": "INTRACARDIAC",
           "description": "Intracardiac",
           "meaning": "OMOP:4156705",
           "instantiates": [],
@@ -13472,7 +13440,6 @@
           "extensions": {},
           "annotations": {},
           "alt_descriptions": {},
-          "title": "INTRACARDIAC",
           "todos": [],
           "notes": [],
           "comments": [],
@@ -13492,8 +13459,8 @@
           "keywords": [],
           "meaning_url": "https://athena.ohdsi.org/search-terms/terms/4156705"
         },
-        "OMOP:4156706": {
-          "text": "OMOP:4156706",
+        "INTRADERMAL": {
+          "text": "INTRADERMAL",
           "description": "Intradermal",
           "meaning": "OMOP:4156706",
           "instantiates": [],
@@ -13502,7 +13469,6 @@
           "extensions": {},
           "annotations": {},
           "alt_descriptions": {},
-          "title": "INTRADERMAL",
           "todos": [],
           "notes": [],
           "comments": [],
@@ -13522,8 +13488,8 @@
           "keywords": [],
           "meaning_url": "https://athena.ohdsi.org/search-terms/terms/4156706"
         },
-        "OMOP:4156707": {
-          "text": "OMOP:4156707",
+        "INTRAPLEURAL": {
+          "text": "INTRAPLEURAL",
           "description": "Intrapleural",
           "meaning": "OMOP:4156707",
           "instantiates": [],
@@ -13532,7 +13498,6 @@
           "extensions": {},
           "annotations": {},
           "alt_descriptions": {},
-          "title": "INTRAPLEURAL",
           "todos": [],
           "notes": [],
           "comments": [],
@@ -13552,8 +13517,8 @@
           "keywords": [],
           "meaning_url": "https://athena.ohdsi.org/search-terms/terms/4156707"
         },
-        "OMOP:4156708": {
-          "text": "OMOP:4156708",
+        "PERIARTICULAR": {
+          "text": "PERIARTICULAR",
           "description": "Periarticular",
           "meaning": "OMOP:4156708",
           "instantiates": [],
@@ -13562,7 +13527,6 @@
           "extensions": {},
           "annotations": {},
           "alt_descriptions": {},
-          "title": "PERIARTICULAR",
           "todos": [],
           "notes": [],
           "comments": [],
@@ -13582,8 +13546,8 @@
           "keywords": [],
           "meaning_url": "https://athena.ohdsi.org/search-terms/terms/4156708"
         },
-        "OMOP:4157756": {
-          "text": "OMOP:4157756",
+        "ENDOSINUSIAL": {
+          "text": "ENDOSINUSIAL",
           "description": "Endosinusial",
           "meaning": "OMOP:4157756",
           "instantiates": [],
@@ -13592,7 +13556,6 @@
           "extensions": {},
           "annotations": {},
           "alt_descriptions": {},
-          "title": "ENDOSINUSIAL",
           "todos": [],
           "notes": [],
           "comments": [],
@@ -13612,8 +13575,8 @@
           "keywords": [],
           "meaning_url": "https://athena.ohdsi.org/search-terms/terms/4157756"
         },
-        "OMOP:4157757": {
-          "text": "OMOP:4157757",
+        "INTRACAVERNOUS": {
+          "text": "INTRACAVERNOUS",
           "description": "Intracavernous",
           "meaning": "OMOP:4157757",
           "instantiates": [],
@@ -13622,7 +13585,6 @@
           "extensions": {},
           "annotations": {},
           "alt_descriptions": {},
-          "title": "INTRACAVERNOUS",
           "todos": [],
           "notes": [],
           "comments": [],
@@ -13642,8 +13604,8 @@
           "keywords": [],
           "meaning_url": "https://athena.ohdsi.org/search-terms/terms/4157757"
         },
-        "OMOP:4157758": {
-          "text": "OMOP:4157758",
+        "INTRALESIONAL": {
+          "text": "INTRALESIONAL",
           "description": "Intralesional",
           "meaning": "OMOP:4157758",
           "instantiates": [],
@@ -13652,7 +13614,6 @@
           "extensions": {},
           "annotations": {},
           "alt_descriptions": {},
-          "title": "INTRALESIONAL",
           "todos": [],
           "notes": [],
           "comments": [],
@@ -13672,8 +13633,8 @@
           "keywords": [],
           "meaning_url": "https://athena.ohdsi.org/search-terms/terms/4157758"
         },
-        "OMOP:4157759": {
-          "text": "OMOP:4157759",
+        "INTRALYMPHATIC": {
+          "text": "INTRALYMPHATIC",
           "description": "Intralymphatic",
           "meaning": "OMOP:4157759",
           "instantiates": [],
@@ -13682,7 +13643,6 @@
           "extensions": {},
           "annotations": {},
           "alt_descriptions": {},
-          "title": "INTRALYMPHATIC",
           "todos": [],
           "notes": [],
           "comments": [],
@@ -13702,8 +13662,8 @@
           "keywords": [],
           "meaning_url": "https://athena.ohdsi.org/search-terms/terms/4157759"
         },
-        "OMOP:4157760": {
-          "text": "OMOP:4157760",
+        "INTRAOCULAR": {
+          "text": "INTRAOCULAR",
           "description": "Intraocular",
           "meaning": "OMOP:4157760",
           "instantiates": [],
@@ -13712,7 +13672,6 @@
           "extensions": {},
           "annotations": {},
           "alt_descriptions": {},
-          "title": "INTRAOCULAR",
           "todos": [],
           "notes": [],
           "comments": [],
@@ -13732,8 +13691,8 @@
           "keywords": [],
           "meaning_url": "https://athena.ohdsi.org/search-terms/terms/4157760"
         },
-        "OMOP:4157761": {
-          "text": "OMOP:4157761",
+        "PERINEURAL": {
+          "text": "PERINEURAL",
           "description": "Perineural",
           "meaning": "OMOP:4157761",
           "instantiates": [],
@@ -13742,7 +13701,6 @@
           "extensions": {},
           "annotations": {},
           "alt_descriptions": {},
-          "title": "PERINEURAL",
           "todos": [],
           "notes": [],
           "comments": [],
@@ -13762,8 +13720,8 @@
           "keywords": [],
           "meaning_url": "https://athena.ohdsi.org/search-terms/terms/4157761"
         },
-        "OMOP:4171079": {
-          "text": "OMOP:4171079",
+        "INTRACRANIAL": {
+          "text": "INTRACRANIAL",
           "description": "Intracranial",
           "meaning": "OMOP:4171079",
           "instantiates": [],
@@ -13772,7 +13730,6 @@
           "extensions": {},
           "annotations": {},
           "alt_descriptions": {},
-          "title": "INTRACRANIAL",
           "todos": [],
           "notes": [],
           "comments": [],
@@ -13792,8 +13749,8 @@
           "keywords": [],
           "meaning_url": "https://athena.ohdsi.org/search-terms/terms/4171079"
         },
-        "OMOP:4163765": {
-          "text": "OMOP:4163765",
+        "DENTAL": {
+          "text": "DENTAL",
           "description": "Dental",
           "meaning": "OMOP:4163765",
           "instantiates": [],
@@ -13802,7 +13759,6 @@
           "extensions": {},
           "annotations": {},
           "alt_descriptions": {},
-          "title": "DENTAL",
           "todos": [],
           "notes": [],
           "comments": [],
@@ -13822,8 +13778,8 @@
           "keywords": [],
           "meaning_url": "https://athena.ohdsi.org/search-terms/terms/4163765"
         },
-        "OMOP:4163767": {
-          "text": "OMOP:4163767",
+        "INTRAAMNIOTIC": {
+          "text": "INTRAAMNIOTIC",
           "description": "Intraamniotic",
           "meaning": "OMOP:4163767",
           "instantiates": [],
@@ -13832,7 +13788,6 @@
           "extensions": {},
           "annotations": {},
           "alt_descriptions": {},
-          "title": "INTRAAMNIOTIC",
           "todos": [],
           "notes": [],
           "comments": [],
@@ -13852,8 +13807,8 @@
           "keywords": [],
           "meaning_url": "https://athena.ohdsi.org/search-terms/terms/4163767"
         },
-        "OMOP:4163768": {
-          "text": "OMOP:4163768",
+        "INTRABURSAL": {
+          "text": "INTRABURSAL",
           "description": "Intrabursal",
           "meaning": "OMOP:4163768",
           "instantiates": [],
@@ -13862,7 +13817,6 @@
           "extensions": {},
           "annotations": {},
           "alt_descriptions": {},
-          "title": "INTRABURSAL",
           "todos": [],
           "notes": [],
           "comments": [],
@@ -13882,8 +13836,8 @@
           "keywords": [],
           "meaning_url": "https://athena.ohdsi.org/search-terms/terms/4163768"
         },
-        "OMOP:4163769": {
-          "text": "OMOP:4163769",
+        "INTRADISCAL": {
+          "text": "INTRADISCAL",
           "description": "Intradiscal",
           "meaning": "OMOP:4163769",
           "instantiates": [],
@@ -13892,7 +13846,6 @@
           "extensions": {},
           "annotations": {},
           "alt_descriptions": {},
-          "title": "INTRADISCAL",
           "todos": [],
           "notes": [],
           "comments": [],
@@ -13912,8 +13865,8 @@
           "keywords": [],
           "meaning_url": "https://athena.ohdsi.org/search-terms/terms/4163769"
         },
-        "OMOP:4163770": {
-          "text": "OMOP:4163770",
+        "SUBCONJUNCTIVAL": {
+          "text": "SUBCONJUNCTIVAL",
           "description": "Subconjunctival",
           "meaning": "OMOP:4163770",
           "instantiates": [],
@@ -13922,7 +13875,6 @@
           "extensions": {},
           "annotations": {},
           "alt_descriptions": {},
-          "title": "SUBCONJUNCTIVAL",
           "todos": [],
           "notes": [],
           "comments": [],
@@ -13942,8 +13894,8 @@
           "keywords": [],
           "meaning_url": "https://athena.ohdsi.org/search-terms/terms/4163770"
         },
-        "OMOP:4171243": {
-          "text": "OMOP:4171243",
+        "MUCOUS_FISTULA": {
+          "text": "MUCOUS_FISTULA",
           "description": "Mucous fistula",
           "meaning": "OMOP:4171243",
           "instantiates": [],
@@ -13952,7 +13904,6 @@
           "extensions": {},
           "annotations": {},
           "alt_descriptions": {},
-          "title": "MUCOUS_FISTULA",
           "todos": [],
           "notes": [],
           "comments": [],
@@ -13972,8 +13923,8 @@
           "keywords": [],
           "meaning_url": "https://athena.ohdsi.org/search-terms/terms/4171243"
         },
-        "OMOP:4171725": {
-          "text": "OMOP:4171725",
+        "INTRAPROSTATIC": {
+          "text": "INTRAPROSTATIC",
           "description": "Intraprostatic",
           "meaning": "OMOP:4171725",
           "instantiates": [],
@@ -13982,7 +13933,6 @@
           "extensions": {},
           "annotations": {},
           "alt_descriptions": {},
-          "title": "INTRAPROSTATIC",
           "todos": [],
           "notes": [],
           "comments": [],
@@ -14002,8 +13952,8 @@
           "keywords": [],
           "meaning_url": "https://athena.ohdsi.org/search-terms/terms/4171725"
         },
-        "OMOP:4171884": {
-          "text": "OMOP:4171884",
+        "INTRAVENOUS_PERIPHERAL": {
+          "text": "INTRAVENOUS_PERIPHERAL",
           "description": "Intravenous peripheral",
           "meaning": "OMOP:4171884",
           "instantiates": [],
@@ -14012,7 +13962,6 @@
           "extensions": {},
           "annotations": {},
           "alt_descriptions": {},
-          "title": "INTRAVENOUS_PERIPHERAL",
           "todos": [],
           "notes": [],
           "comments": [],
@@ -14032,8 +13981,8 @@
           "keywords": [],
           "meaning_url": "https://athena.ohdsi.org/search-terms/terms/4171884"
         },
-        "OMOP:4171893": {
-          "text": "OMOP:4171893",
+        "PERIOSTEAL": {
+          "text": "PERIOSTEAL",
           "description": "Periosteal",
           "meaning": "OMOP:4171893",
           "instantiates": [],
@@ -14042,7 +13991,6 @@
           "extensions": {},
           "annotations": {},
           "alt_descriptions": {},
-          "title": "PERIOSTEAL",
           "todos": [],
           "notes": [],
           "comments": [],
@@ -14062,8 +14010,8 @@
           "keywords": [],
           "meaning_url": "https://athena.ohdsi.org/search-terms/terms/4171893"
         },
-        "OMOP:4172191": {
-          "text": "OMOP:4172191",
+        "ESOPHAGOSTOMY": {
+          "text": "ESOPHAGOSTOMY",
           "description": "Esophagostomy",
           "meaning": "OMOP:4172191",
           "instantiates": [],
@@ -14072,7 +14020,6 @@
           "extensions": {},
           "annotations": {},
           "alt_descriptions": {},
-          "title": "ESOPHAGOSTOMY",
           "todos": [],
           "notes": [],
           "comments": [],
@@ -14092,8 +14039,8 @@
           "keywords": [],
           "meaning_url": "https://athena.ohdsi.org/search-terms/terms/4172191"
         },
-        "OMOP:4172316": {
-          "text": "OMOP:4172316",
+        "NASODUODENAL": {
+          "text": "NASODUODENAL",
           "description": "Nasoduodenal",
           "meaning": "OMOP:4172316",
           "instantiates": [],
@@ -14102,7 +14049,6 @@
           "extensions": {},
           "annotations": {},
           "alt_descriptions": {},
-          "title": "NASODUODENAL",
           "todos": [],
           "notes": [],
           "comments": [],
@@ -14122,8 +14068,8 @@
           "keywords": [],
           "meaning_url": "https://athena.ohdsi.org/search-terms/terms/4172316"
         },
-        "OMOP:4177987": {
-          "text": "OMOP:4177987",
+        "PERCUTANEOUS": {
+          "text": "PERCUTANEOUS",
           "description": "Percutaneous",
           "meaning": "OMOP:4177987",
           "instantiates": [],
@@ -14132,7 +14078,6 @@
           "extensions": {},
           "annotations": {},
           "alt_descriptions": {},
-          "title": "PERCUTANEOUS",
           "todos": [],
           "notes": [],
           "comments": [],
@@ -14152,8 +14097,8 @@
           "keywords": [],
           "meaning_url": "https://athena.ohdsi.org/search-terms/terms/4177987"
         },
-        "OMOP:4166865": {
-          "text": "OMOP:4166865",
+        "SUBORBITAL": {
+          "text": "SUBORBITAL",
           "description": "Suborbital",
           "meaning": "OMOP:4166865",
           "instantiates": [],
@@ -14162,7 +14107,6 @@
           "extensions": {},
           "annotations": {},
           "alt_descriptions": {},
-          "title": "SUBORBITAL",
           "todos": [],
           "notes": [],
           "comments": [],
@@ -14182,8 +14126,8 @@
           "keywords": [],
           "meaning_url": "https://athena.ohdsi.org/search-terms/terms/4166865"
         },
-        "OMOP:4167393": {
-          "text": "OMOP:4167393",
+        "INTRATHORACIC": {
+          "text": "INTRATHORACIC",
           "description": "Intrathoracic",
           "meaning": "OMOP:4167393",
           "instantiates": [],
@@ -14192,7 +14136,6 @@
           "extensions": {},
           "annotations": {},
           "alt_descriptions": {},
-          "title": "INTRATHORACIC",
           "todos": [],
           "notes": [],
           "comments": [],
@@ -14212,8 +14155,8 @@
           "keywords": [],
           "meaning_url": "https://athena.ohdsi.org/search-terms/terms/4167393"
         },
-        "OMOP:4167540": {
-          "text": "OMOP:4167540",
+        "ENTERAL": {
+          "text": "ENTERAL",
           "description": "Enteral",
           "meaning": "OMOP:4167540",
           "instantiates": [],
@@ -14222,7 +14165,6 @@
           "extensions": {},
           "annotations": {},
           "alt_descriptions": {},
-          "title": "ENTERAL",
           "todos": [],
           "notes": [],
           "comments": [],
@@ -14242,8 +14184,8 @@
           "keywords": [],
           "meaning_url": "https://athena.ohdsi.org/search-terms/terms/4167540"
         },
-        "OMOP:4168038": {
-          "text": "OMOP:4168038",
+        "INTRAMYOMETRIAL": {
+          "text": "INTRAMYOMETRIAL",
           "description": "Intramyometrial",
           "meaning": "OMOP:4168038",
           "instantiates": [],
@@ -14252,7 +14194,6 @@
           "extensions": {},
           "annotations": {},
           "alt_descriptions": {},
-          "title": "INTRAMYOMETRIAL",
           "todos": [],
           "notes": [],
           "comments": [],
@@ -14272,8 +14213,8 @@
           "keywords": [],
           "meaning_url": "https://athena.ohdsi.org/search-terms/terms/4168038"
         },
-        "OMOP:4168047": {
-          "text": "OMOP:4168047",
+        "COLOSTOMY": {
+          "text": "COLOSTOMY",
           "description": "Colostomy",
           "meaning": "OMOP:4168047",
           "instantiates": [],
@@ -14282,7 +14223,6 @@
           "extensions": {},
           "annotations": {},
           "alt_descriptions": {},
-          "title": "COLOSTOMY",
           "todos": [],
           "notes": [],
           "comments": [],
@@ -14302,8 +14242,8 @@
           "keywords": [],
           "meaning_url": "https://athena.ohdsi.org/search-terms/terms/4168047"
         },
-        "OMOP:4168656": {
-          "text": "OMOP:4168656",
+        "INTRATYMPANIC": {
+          "text": "INTRATYMPANIC",
           "description": "Intratympanic",
           "meaning": "OMOP:4168656",
           "instantiates": [],
@@ -14312,7 +14252,6 @@
           "extensions": {},
           "annotations": {},
           "alt_descriptions": {},
-          "title": "INTRATYMPANIC",
           "todos": [],
           "notes": [],
           "comments": [],
@@ -14332,8 +14271,8 @@
           "keywords": [],
           "meaning_url": "https://athena.ohdsi.org/search-terms/terms/4168656"
         },
-        "OMOP:4168665": {
-          "text": "OMOP:4168665",
+        "GASTRO_INTESTINAL_STOMA": {
+          "text": "GASTRO_INTESTINAL_STOMA",
           "description": "Gastro-intestinal stoma",
           "meaning": "OMOP:4168665",
           "instantiates": [],
@@ -14342,7 +14281,6 @@
           "extensions": {},
           "annotations": {},
           "alt_descriptions": {},
-          "title": "GASTRO_INTESTINAL_STOMA",
           "todos": [],
           "notes": [],
           "comments": [],
@@ -14362,8 +14300,8 @@
           "keywords": [],
           "meaning_url": "https://athena.ohdsi.org/search-terms/terms/4168665"
         },
-        "OMOP:4169270": {
-          "text": "OMOP:4169270",
+        "INTRAPULMONARY": {
+          "text": "INTRAPULMONARY",
           "description": "Intrapulmonary",
           "meaning": "OMOP:4169270",
           "instantiates": [],
@@ -14372,7 +14310,6 @@
           "extensions": {},
           "annotations": {},
           "alt_descriptions": {},
-          "title": "INTRAPULMONARY",
           "todos": [],
           "notes": [],
           "comments": [],
@@ -14392,8 +14329,8 @@
           "keywords": [],
           "meaning_url": "https://athena.ohdsi.org/search-terms/terms/4169270"
         },
-        "OMOP:4169440": {
-          "text": "OMOP:4169440",
+        "INTRASINAL": {
+          "text": "INTRASINAL",
           "description": "Intrasinal",
           "meaning": "OMOP:4169440",
           "instantiates": [],
@@ -14402,7 +14339,6 @@
           "extensions": {},
           "annotations": {},
           "alt_descriptions": {},
-          "title": "INTRASINAL",
           "todos": [],
           "notes": [],
           "comments": [],
@@ -14422,8 +14358,8 @@
           "keywords": [],
           "meaning_url": "https://athena.ohdsi.org/search-terms/terms/4169440"
         },
-        "OMOP:4169472": {
-          "text": "OMOP:4169472",
+        "TUMOR_CAVITY": {
+          "text": "TUMOR_CAVITY",
           "description": "Tumor cavity",
           "meaning": "OMOP:4169472",
           "instantiates": [],
@@ -14432,7 +14368,6 @@
           "extensions": {},
           "annotations": {},
           "alt_descriptions": {},
-          "title": "TUMOR_CAVITY",
           "todos": [],
           "notes": [],
           "comments": [],
@@ -14452,8 +14387,8 @@
           "keywords": [],
           "meaning_url": "https://athena.ohdsi.org/search-terms/terms/4169472"
         },
-        "OMOP:4169634": {
-          "text": "OMOP:4169634",
+        "SUBMUCOSAL": {
+          "text": "SUBMUCOSAL",
           "description": "Submucosal",
           "meaning": "OMOP:4169634",
           "instantiates": [],
@@ -14462,7 +14397,6 @@
           "extensions": {},
           "annotations": {},
           "alt_descriptions": {},
-          "title": "SUBMUCOSAL",
           "todos": [],
           "notes": [],
           "comments": [],
@@ -14482,8 +14416,8 @@
           "keywords": [],
           "meaning_url": "https://athena.ohdsi.org/search-terms/terms/4169634"
         },
-        "OMOP:4170083": {
-          "text": "OMOP:4170083",
+        "INTRADUCTAL": {
+          "text": "INTRADUCTAL",
           "description": "Intraductal",
           "meaning": "OMOP:4170083",
           "instantiates": [],
@@ -14492,7 +14426,6 @@
           "extensions": {},
           "annotations": {},
           "alt_descriptions": {},
-          "title": "INTRADUCTAL",
           "todos": [],
           "notes": [],
           "comments": [],
@@ -14512,8 +14445,8 @@
           "keywords": [],
           "meaning_url": "https://athena.ohdsi.org/search-terms/terms/4170083"
         },
-        "OMOP:4170113": {
-          "text": "OMOP:4170113",
+        "INTRAVENOUS_CENTRAL": {
+          "text": "INTRAVENOUS_CENTRAL",
           "description": "Intravenous central",
           "meaning": "OMOP:4170113",
           "instantiates": [],
@@ -14522,7 +14455,6 @@
           "extensions": {},
           "annotations": {},
           "alt_descriptions": {},
-          "title": "INTRAVENOUS_CENTRAL",
           "todos": [],
           "notes": [],
           "comments": [],
@@ -14542,8 +14474,8 @@
           "keywords": [],
           "meaning_url": "https://athena.ohdsi.org/search-terms/terms/4170113"
         },
-        "OMOP:4170267": {
-          "text": "OMOP:4170267",
+        "PARAVERTEBRAL": {
+          "text": "PARAVERTEBRAL",
           "description": "Paravertebral",
           "meaning": "OMOP:4170267",
           "instantiates": [],
@@ -14552,7 +14484,6 @@
           "extensions": {},
           "annotations": {},
           "alt_descriptions": {},
-          "title": "PARAVERTEBRAL",
           "todos": [],
           "notes": [],
           "comments": [],
@@ -14572,8 +14503,8 @@
           "keywords": [],
           "meaning_url": "https://athena.ohdsi.org/search-terms/terms/4170267"
         },
-        "OMOP:4170435": {
-          "text": "OMOP:4170435",
+        "UROSTOMY": {
+          "text": "UROSTOMY",
           "description": "Urostomy",
           "meaning": "OMOP:4170435",
           "instantiates": [],
@@ -14582,7 +14513,6 @@
           "extensions": {},
           "annotations": {},
           "alt_descriptions": {},
-          "title": "UROSTOMY",
           "todos": [],
           "notes": [],
           "comments": [],
@@ -14602,8 +14532,8 @@
           "keywords": [],
           "meaning_url": "https://athena.ohdsi.org/search-terms/terms/4170435"
         },
-        "OMOP:4170440": {
-          "text": "OMOP:4170440",
+        "LARYNGEAL": {
+          "text": "LARYNGEAL",
           "description": "Laryngeal",
           "meaning": "OMOP:4170440",
           "instantiates": [],
@@ -14612,7 +14542,6 @@
           "extensions": {},
           "annotations": {},
           "alt_descriptions": {},
-          "title": "LARYNGEAL",
           "todos": [],
           "notes": [],
           "comments": [],
@@ -14632,8 +14561,8 @@
           "keywords": [],
           "meaning_url": "https://athena.ohdsi.org/search-terms/terms/4170440"
         },
-        "OMOP:4170771": {
-          "text": "OMOP:4170771",
+        "SURGICAL_CAVITY": {
+          "text": "SURGICAL_CAVITY",
           "description": "Surgical cavity",
           "meaning": "OMOP:4170771",
           "instantiates": [],
@@ -14642,7 +14571,6 @@
           "extensions": {},
           "annotations": {},
           "alt_descriptions": {},
-          "title": "SURGICAL_CAVITY",
           "todos": [],
           "notes": [],
           "comments": [],
@@ -14662,8 +14590,8 @@
           "keywords": [],
           "meaning_url": "https://athena.ohdsi.org/search-terms/terms/4170771"
         },
-        "OMOP:4171047": {
-          "text": "OMOP:4171047",
+        "INTRAVENOUS": {
+          "text": "INTRAVENOUS",
           "description": "Intravenous",
           "meaning": "OMOP:4171047",
           "instantiates": [],
@@ -14672,7 +14600,6 @@
           "extensions": {},
           "annotations": {},
           "alt_descriptions": {},
-          "title": "INTRAVENOUS",
           "todos": [],
           "notes": [],
           "comments": [],
@@ -14692,8 +14619,8 @@
           "keywords": [],
           "meaning_url": "https://athena.ohdsi.org/search-terms/terms/4171047"
         },
-        "OMOP:4171067": {
-          "text": "OMOP:4171067",
+        "INTRATESTICULAR": {
+          "text": "INTRATESTICULAR",
           "description": "Intratesticular",
           "meaning": "OMOP:4171067",
           "instantiates": [],
@@ -14702,7 +14629,6 @@
           "extensions": {},
           "annotations": {},
           "alt_descriptions": {},
-          "title": "INTRATESTICULAR",
           "todos": [],
           "notes": [],
           "comments": [],
@@ -14722,8 +14648,8 @@
           "keywords": [],
           "meaning_url": "https://athena.ohdsi.org/search-terms/terms/4171067"
         },
-        "OMOP:4186831": {
-          "text": "OMOP:4186831",
+        "ENDOCERVICAL": {
+          "text": "ENDOCERVICAL",
           "description": "Endocervical",
           "meaning": "OMOP:4186831",
           "instantiates": [],
@@ -14732,7 +14658,6 @@
           "extensions": {},
           "annotations": {},
           "alt_descriptions": {},
-          "title": "ENDOCERVICAL",
           "todos": [],
           "notes": [],
           "comments": [],
@@ -14752,8 +14677,8 @@
           "keywords": [],
           "meaning_url": "https://athena.ohdsi.org/search-terms/terms/4186831"
         },
-        "OMOP:4186832": {
-          "text": "OMOP:4186832",
+        "ENDOTRACHEOPULMONARY": {
+          "text": "ENDOTRACHEOPULMONARY",
           "description": "Endotracheopulmonary",
           "meaning": "OMOP:4186832",
           "instantiates": [],
@@ -14762,7 +14687,6 @@
           "extensions": {},
           "annotations": {},
           "alt_descriptions": {},
-          "title": "ENDOTRACHEOPULMONARY",
           "todos": [],
           "notes": [],
           "comments": [],
@@ -14782,8 +14706,8 @@
           "keywords": [],
           "meaning_url": "https://athena.ohdsi.org/search-terms/terms/4186832"
         },
-        "OMOP:4186833": {
-          "text": "OMOP:4186833",
+        "EXTRA_AMNIOTIC": {
+          "text": "EXTRA_AMNIOTIC",
           "description": "Extra-amniotic",
           "meaning": "OMOP:4186833",
           "instantiates": [],
@@ -14792,7 +14716,6 @@
           "extensions": {},
           "annotations": {},
           "alt_descriptions": {},
-          "title": "EXTRA_AMNIOTIC",
           "todos": [],
           "notes": [],
           "comments": [],
@@ -14812,8 +14735,8 @@
           "keywords": [],
           "meaning_url": "https://athena.ohdsi.org/search-terms/terms/4186833"
         },
-        "OMOP:4186834": {
-          "text": "OMOP:4186834",
+        "GASTROENTERAL": {
+          "text": "GASTROENTERAL",
           "description": "Gastroenteral",
           "meaning": "OMOP:4186834",
           "instantiates": [],
@@ -14822,7 +14745,6 @@
           "extensions": {},
           "annotations": {},
           "alt_descriptions": {},
-          "title": "GASTROENTERAL",
           "todos": [],
           "notes": [],
           "comments": [],
@@ -14842,8 +14764,8 @@
           "keywords": [],
           "meaning_url": "https://athena.ohdsi.org/search-terms/terms/4186834"
         },
-        "OMOP:4186835": {
-          "text": "OMOP:4186835",
+        "INTRACERVICAL": {
+          "text": "INTRACERVICAL",
           "description": "Intracervical",
           "meaning": "OMOP:4186835",
           "instantiates": [],
@@ -14852,7 +14774,6 @@
           "extensions": {},
           "annotations": {},
           "alt_descriptions": {},
-          "title": "INTRACERVICAL",
           "todos": [],
           "notes": [],
           "comments": [],
@@ -14872,8 +14793,8 @@
           "keywords": [],
           "meaning_url": "https://athena.ohdsi.org/search-terms/terms/4186835"
         },
-        "OMOP:4186836": {
-          "text": "OMOP:4186836",
+        "INTRACORONARY": {
+          "text": "INTRACORONARY",
           "description": "Intracoronary",
           "meaning": "OMOP:4186836",
           "instantiates": [],
@@ -14882,7 +14803,6 @@
           "extensions": {},
           "annotations": {},
           "alt_descriptions": {},
-          "title": "INTRACORONARY",
           "todos": [],
           "notes": [],
           "comments": [],
@@ -14902,8 +14822,8 @@
           "keywords": [],
           "meaning_url": "https://athena.ohdsi.org/search-terms/terms/4186836"
         },
-        "OMOP:4186837": {
-          "text": "OMOP:4186837",
+        "INTRASTERNAL": {
+          "text": "INTRASTERNAL",
           "description": "Intrasternal",
           "meaning": "OMOP:4186837",
           "instantiates": [],
@@ -14912,7 +14832,6 @@
           "extensions": {},
           "annotations": {},
           "alt_descriptions": {},
-          "title": "INTRASTERNAL",
           "todos": [],
           "notes": [],
           "comments": [],
@@ -14932,8 +14851,8 @@
           "keywords": [],
           "meaning_url": "https://athena.ohdsi.org/search-terms/terms/4186837"
         },
-        "OMOP:4186838": {
-          "text": "OMOP:4186838",
+        "INTRAVESICAL": {
+          "text": "INTRAVESICAL",
           "description": "Intravesical",
           "meaning": "OMOP:4186838",
           "instantiates": [],
@@ -14942,7 +14861,6 @@
           "extensions": {},
           "annotations": {},
           "alt_descriptions": {},
-          "title": "INTRAVESICAL",
           "todos": [],
           "notes": [],
           "comments": [],
@@ -14962,8 +14880,8 @@
           "keywords": [],
           "meaning_url": "https://athena.ohdsi.org/search-terms/terms/4186838"
         },
-        "OMOP:4186839": {
-          "text": "OMOP:4186839",
+        "OROMUCOSAL": {
+          "text": "OROMUCOSAL",
           "description": "Oromucosal",
           "meaning": "OMOP:4186839",
           "instantiates": [],
@@ -14972,7 +14890,6 @@
           "extensions": {},
           "annotations": {},
           "alt_descriptions": {},
-          "title": "OROMUCOSAL",
           "todos": [],
           "notes": [],
           "comments": [],
@@ -14992,8 +14909,8 @@
           "keywords": [],
           "meaning_url": "https://athena.ohdsi.org/search-terms/terms/4186839"
         },
-        "OMOP:4220455": {
-          "text": "OMOP:4220455",
+        "CAUDAL": {
+          "text": "CAUDAL",
           "description": "Caudal",
           "meaning": "OMOP:4220455",
           "instantiates": [],
@@ -15002,7 +14919,6 @@
           "extensions": {},
           "annotations": {},
           "alt_descriptions": {},
-          "title": "CAUDAL",
           "todos": [],
           "notes": [],
           "comments": [],
@@ -15022,8 +14938,8 @@
           "keywords": [],
           "meaning_url": "https://athena.ohdsi.org/search-terms/terms/4220455"
         },
-        "OMOP:4181897": {
-          "text": "OMOP:4181897",
+        "BUCCAL": {
+          "text": "BUCCAL",
           "description": "Buccal",
           "meaning": "OMOP:4181897",
           "instantiates": [],
@@ -15032,7 +14948,6 @@
           "extensions": {},
           "annotations": {},
           "alt_descriptions": {},
-          "title": "BUCCAL",
           "todos": [],
           "notes": [],
           "comments": [],
@@ -15052,8 +14967,8 @@
           "keywords": [],
           "meaning_url": "https://athena.ohdsi.org/search-terms/terms/4181897"
         },
-        "OMOP:4184451": {
-          "text": "OMOP:4184451",
+        "OPHTHALMIC": {
+          "text": "OPHTHALMIC",
           "description": "Ophthalmic",
           "meaning": "OMOP:4184451",
           "instantiates": [],
@@ -15062,7 +14977,6 @@
           "extensions": {},
           "annotations": {},
           "alt_descriptions": {},
-          "title": "OPHTHALMIC",
           "todos": [],
           "notes": [],
           "comments": [],
@@ -15082,8 +14996,8 @@
           "keywords": [],
           "meaning_url": "https://athena.ohdsi.org/search-terms/terms/4184451"
         },
-        "OMOP:4222254": {
-          "text": "OMOP:4222254",
+        "BODY_CAVITY": {
+          "text": "BODY_CAVITY",
           "description": "Body cavity",
           "meaning": "OMOP:4222254",
           "instantiates": [],
@@ -15092,7 +15006,6 @@
           "extensions": {},
           "annotations": {},
           "alt_descriptions": {},
-          "title": "BODY_CAVITY",
           "todos": [],
           "notes": [],
           "comments": [],
@@ -15112,8 +15025,8 @@
           "keywords": [],
           "meaning_url": "https://athena.ohdsi.org/search-terms/terms/4222254"
         },
-        "OMOP:4213522": {
-          "text": "OMOP:4213522",
+        "INTRAOSSEOUS": {
+          "text": "INTRAOSSEOUS",
           "description": "Intraosseous",
           "meaning": "OMOP:4213522",
           "instantiates": [],
@@ -15122,7 +15035,6 @@
           "extensions": {},
           "annotations": {},
           "alt_descriptions": {},
-          "title": "INTRAOSSEOUS",
           "todos": [],
           "notes": [],
           "comments": [],
@@ -15142,8 +15054,8 @@
           "keywords": [],
           "meaning_url": "https://athena.ohdsi.org/search-terms/terms/4213522"
         },
-        "OMOP:4222259": {
-          "text": "OMOP:4222259",
+        "INTRAVENTRICULAR_ROUTE_CARDIAC": {
+          "text": "INTRAVENTRICULAR_ROUTE_CARDIAC",
           "description": "Intraventricular route - cardiac",
           "meaning": "OMOP:4222259",
           "instantiates": [],
@@ -15152,7 +15064,6 @@
           "extensions": {},
           "annotations": {},
           "alt_descriptions": {},
-          "title": "INTRAVENTRICULAR_ROUTE_CARDIAC",
           "todos": [],
           "notes": [],
           "comments": [],
@@ -15172,8 +15083,8 @@
           "keywords": [],
           "meaning_url": "https://athena.ohdsi.org/search-terms/terms/4222259"
         },
-        "OMOP:4223965": {
-          "text": "OMOP:4223965",
+        "INTRABILIARY": {
+          "text": "INTRABILIARY",
           "description": "Intrabiliary",
           "meaning": "OMOP:4223965",
           "instantiates": [],
@@ -15182,7 +15093,6 @@
           "extensions": {},
           "annotations": {},
           "alt_descriptions": {},
-          "title": "INTRABILIARY",
           "todos": [],
           "notes": [],
           "comments": [],
@@ -15202,8 +15112,8 @@
           "keywords": [],
           "meaning_url": "https://athena.ohdsi.org/search-terms/terms/4223965"
         },
-        "OMOP:4224886": {
-          "text": "OMOP:4224886",
+        "INTRACEREBROVENTRICULAR": {
+          "text": "INTRACEREBROVENTRICULAR",
           "description": "Intracerebroventricular",
           "meaning": "OMOP:4224886",
           "instantiates": [],
@@ -15212,7 +15122,6 @@
           "extensions": {},
           "annotations": {},
           "alt_descriptions": {},
-          "title": "INTRACEREBROVENTRICULAR",
           "todos": [],
           "notes": [],
           "comments": [],
@@ -15232,8 +15141,8 @@
           "keywords": [],
           "meaning_url": "https://athena.ohdsi.org/search-terms/terms/4224886"
         },
-        "OMOP:4217202": {
-          "text": "OMOP:4217202",
+        "INTRATHECAL": {
+          "text": "INTRATHECAL",
           "description": "Intrathecal",
           "meaning": "OMOP:4217202",
           "instantiates": [],
@@ -15242,7 +15151,6 @@
           "extensions": {},
           "annotations": {},
           "alt_descriptions": {},
-          "title": "INTRATHECAL",
           "todos": [],
           "notes": [],
           "comments": [],
@@ -15262,8 +15170,8 @@
           "keywords": [],
           "meaning_url": "https://athena.ohdsi.org/search-terms/terms/4217202"
         },
-        "OMOP:4225555": {
-          "text": "OMOP:4225555",
+        "EPIDURAL": {
+          "text": "EPIDURAL",
           "description": "Epidural",
           "meaning": "OMOP:4225555",
           "instantiates": [],
@@ -15272,7 +15180,6 @@
           "extensions": {},
           "annotations": {},
           "alt_descriptions": {},
-          "title": "EPIDURAL",
           "todos": [],
           "notes": [],
           "comments": [],
@@ -15292,8 +15199,8 @@
           "keywords": [],
           "meaning_url": "https://athena.ohdsi.org/search-terms/terms/4225555"
         },
-        "OMOP:4229543": {
-          "text": "OMOP:4229543",
+        "INTRATRACHEAL": {
+          "text": "INTRATRACHEAL",
           "description": "Intratracheal",
           "meaning": "OMOP:4229543",
           "instantiates": [],
@@ -15302,7 +15209,6 @@
           "extensions": {},
           "annotations": {},
           "alt_descriptions": {},
-          "title": "INTRATRACHEAL",
           "todos": [],
           "notes": [],
           "comments": [],
@@ -15322,8 +15228,8 @@
           "keywords": [],
           "meaning_url": "https://athena.ohdsi.org/search-terms/terms/4229543"
         },
-        "OMOP:4233974": {
-          "text": "OMOP:4233974",
+        "URETHRAL": {
+          "text": "URETHRAL",
           "description": "Urethral",
           "meaning": "OMOP:4233974",
           "instantiates": [],
@@ -15332,7 +15238,6 @@
           "extensions": {},
           "annotations": {},
           "alt_descriptions": {},
-          "title": "URETHRAL",
           "todos": [],
           "notes": [],
           "comments": [],
@@ -15352,8 +15257,8 @@
           "keywords": [],
           "meaning_url": "https://athena.ohdsi.org/search-terms/terms/4233974"
         },
-        "OMOP:4232601": {
-          "text": "OMOP:4232601",
+        "TRANSMUCOSAL": {
+          "text": "TRANSMUCOSAL",
           "description": "Transmucosal",
           "meaning": "OMOP:4232601",
           "instantiates": [],
@@ -15362,7 +15267,6 @@
           "extensions": {},
           "annotations": {},
           "alt_descriptions": {},
-          "title": "TRANSMUCOSAL",
           "todos": [],
           "notes": [],
           "comments": [],
@@ -15382,8 +15286,8 @@
           "keywords": [],
           "meaning_url": "https://athena.ohdsi.org/search-terms/terms/4232601"
         },
-        "OMOP:4262099": {
-          "text": "OMOP:4262099",
+        "TRANSDERMAL": {
+          "text": "TRANSDERMAL",
           "description": "Transdermal",
           "meaning": "OMOP:4262099",
           "instantiates": [],
@@ -15392,7 +15296,6 @@
           "extensions": {},
           "annotations": {},
           "alt_descriptions": {},
-          "title": "TRANSDERMAL",
           "todos": [],
           "notes": [],
           "comments": [],
@@ -15412,8 +15315,8 @@
           "keywords": [],
           "meaning_url": "https://athena.ohdsi.org/search-terms/terms/4262099"
         },
-        "OMOP:4240824": {
-          "text": "OMOP:4240824",
+        "INTRA_ARTERIAL": {
+          "text": "INTRA_ARTERIAL",
           "description": "Intra-arterial",
           "meaning": "OMOP:4240824",
           "instantiates": [],
@@ -15422,7 +15325,6 @@
           "extensions": {},
           "annotations": {},
           "alt_descriptions": {},
-          "title": "INTRA_ARTERIAL",
           "todos": [],
           "notes": [],
           "comments": [],
@@ -15442,8 +15344,8 @@
           "keywords": [],
           "meaning_url": "https://athena.ohdsi.org/search-terms/terms/4240824"
         },
-        "OMOP:4243022": {
-          "text": "OMOP:4243022",
+        "INTRAPERITONEAL": {
+          "text": "INTRAPERITONEAL",
           "description": "Intraperitoneal",
           "meaning": "OMOP:4243022",
           "instantiates": [],
@@ -15452,7 +15354,6 @@
           "extensions": {},
           "annotations": {},
           "alt_descriptions": {},
-          "title": "INTRAPERITONEAL",
           "todos": [],
           "notes": [],
           "comments": [],
@@ -15472,8 +15373,8 @@
           "keywords": [],
           "meaning_url": "https://athena.ohdsi.org/search-terms/terms/4243022"
         },
-        "OMOP:4246511": {
-          "text": "OMOP:4246511",
+        "INTRAMEDULLARY": {
+          "text": "INTRAMEDULLARY",
           "description": "Intramedullary",
           "meaning": "OMOP:4246511",
           "instantiates": [],
@@ -15482,7 +15383,6 @@
           "extensions": {},
           "annotations": {},
           "alt_descriptions": {},
-          "title": "INTRAMEDULLARY",
           "todos": [],
           "notes": [],
           "comments": [],
@@ -15502,8 +15402,8 @@
           "keywords": [],
           "meaning_url": "https://athena.ohdsi.org/search-terms/terms/4246511"
         },
-        "OMOP:4269621": {
-          "text": "OMOP:4269621",
+        "INTRAUTERINE": {
+          "text": "INTRAUTERINE",
           "description": "Intrauterine",
           "meaning": "OMOP:4269621",
           "instantiates": [],
@@ -15512,7 +15412,6 @@
           "extensions": {},
           "annotations": {},
           "alt_descriptions": {},
-          "title": "INTRAUTERINE",
           "todos": [],
           "notes": [],
           "comments": [],
@@ -15532,8 +15431,8 @@
           "keywords": [],
           "meaning_url": "https://athena.ohdsi.org/search-terms/terms/4269621"
         },
-        "OMOP:4262914": {
-          "text": "OMOP:4262914",
+        "NASAL": {
+          "text": "NASAL",
           "description": "Nasal",
           "meaning": "OMOP:4262914",
           "instantiates": [],
@@ -15542,7 +15441,6 @@
           "extensions": {},
           "annotations": {},
           "alt_descriptions": {},
-          "title": "NASAL",
           "todos": [],
           "notes": [],
           "comments": [],
@@ -15562,8 +15460,8 @@
           "keywords": [],
           "meaning_url": "https://athena.ohdsi.org/search-terms/terms/4262914"
         },
-        "OMOP:4263689": {
-          "text": "OMOP:4263689",
+        "TOPICAL": {
+          "text": "TOPICAL",
           "description": "Topical",
           "meaning": "OMOP:4263689",
           "instantiates": [],
@@ -15572,7 +15470,6 @@
           "extensions": {},
           "annotations": {},
           "alt_descriptions": {},
-          "title": "TOPICAL",
           "todos": [],
           "notes": [],
           "comments": [],
@@ -15592,8 +15489,8 @@
           "keywords": [],
           "meaning_url": "https://athena.ohdsi.org/search-terms/terms/4263689"
         },
-        "OMOP:4290759": {
-          "text": "OMOP:4290759",
+        "RECTAL": {
+          "text": "RECTAL",
           "description": "Rectal",
           "meaning": "OMOP:4290759",
           "instantiates": [],
@@ -15602,7 +15499,6 @@
           "extensions": {},
           "annotations": {},
           "alt_descriptions": {},
-          "title": "RECTAL",
           "todos": [],
           "notes": [],
           "comments": [],
@@ -15622,8 +15518,8 @@
           "keywords": [],
           "meaning_url": "https://athena.ohdsi.org/search-terms/terms/4290759"
         },
-        "OMOP:4292110": {
-          "text": "OMOP:4292110",
+        "SUBLINGUAL": {
+          "text": "SUBLINGUAL",
           "description": "Sublingual",
           "meaning": "OMOP:4292110",
           "instantiates": [],
@@ -15632,7 +15528,6 @@
           "extensions": {},
           "annotations": {},
           "alt_descriptions": {},
-          "title": "SUBLINGUAL",
           "todos": [],
           "notes": [],
           "comments": [],
@@ -15652,8 +15547,8 @@
           "keywords": [],
           "meaning_url": "https://athena.ohdsi.org/search-terms/terms/4292110"
         },
-        "OMOP:4292410": {
-          "text": "OMOP:4292410",
+        "INTRALUMINAL": {
+          "text": "INTRALUMINAL",
           "description": "Intraluminal",
           "meaning": "OMOP:4292410",
           "instantiates": [],
@@ -15662,7 +15557,6 @@
           "extensions": {},
           "annotations": {},
           "alt_descriptions": {},
-          "title": "INTRALUMINAL",
           "todos": [],
           "notes": [],
           "comments": [],
@@ -15682,8 +15576,8 @@
           "keywords": [],
           "meaning_url": "https://athena.ohdsi.org/search-terms/terms/4292410"
         },
-        "OMOP:4304730": {
-          "text": "OMOP:4304730",
+        "TRANSCERVICAL": {
+          "text": "TRANSCERVICAL",
           "description": "Transcervical",
           "meaning": "OMOP:4304730",
           "instantiates": [],
@@ -15692,7 +15586,6 @@
           "extensions": {},
           "annotations": {},
           "alt_descriptions": {},
-          "title": "TRANSCERVICAL",
           "todos": [],
           "notes": [],
           "comments": [],
@@ -15712,8 +15605,8 @@
           "keywords": [],
           "meaning_url": "https://athena.ohdsi.org/search-terms/terms/4304730"
         },
-        "OMOP:4304882": {
-          "text": "OMOP:4304882",
+        "INTRAABDOMINAL": {
+          "text": "INTRAABDOMINAL",
           "description": "Intraabdominal",
           "meaning": "OMOP:4304882",
           "instantiates": [],
@@ -15722,7 +15615,6 @@
           "extensions": {},
           "annotations": {},
           "alt_descriptions": {},
-          "title": "INTRAABDOMINAL",
           "todos": [],
           "notes": [],
           "comments": [],
@@ -15742,8 +15634,8 @@
           "keywords": [],
           "meaning_url": "https://athena.ohdsi.org/search-terms/terms/4304882"
         },
-        "OMOP:4305382": {
-          "text": "OMOP:4305382",
+        "TRANSURETHRAL": {
+          "text": "TRANSURETHRAL",
           "description": "Transurethral",
           "meaning": "OMOP:4305382",
           "instantiates": [],
@@ -15752,7 +15644,6 @@
           "extensions": {},
           "annotations": {},
           "alt_descriptions": {},
-          "title": "TRANSURETHRAL",
           "todos": [],
           "notes": [],
           "comments": [],
@@ -15772,8 +15663,8 @@
           "keywords": [],
           "meaning_url": "https://athena.ohdsi.org/search-terms/terms/4305382"
         },
-        "OMOP:4305564": {
-          "text": "OMOP:4305564",
+        "PERITENDINOUS": {
+          "text": "PERITENDINOUS",
           "description": "Peritendinous",
           "meaning": "OMOP:4305564",
           "instantiates": [],
@@ -15782,7 +15673,6 @@
           "extensions": {},
           "annotations": {},
           "alt_descriptions": {},
-          "title": "PERITENDINOUS",
           "todos": [],
           "notes": [],
           "comments": [],
@@ -15802,8 +15692,8 @@
           "keywords": [],
           "meaning_url": "https://athena.ohdsi.org/search-terms/terms/4305564"
         },
-        "OMOP:4305679": {
-          "text": "OMOP:4305679",
+        "ILEOSTOMY": {
+          "text": "ILEOSTOMY",
           "description": "Ileostomy",
           "meaning": "OMOP:4305679",
           "instantiates": [],
@@ -15812,7 +15702,6 @@
           "extensions": {},
           "annotations": {},
           "alt_descriptions": {},
-          "title": "ILEOSTOMY",
           "todos": [],
           "notes": [],
           "comments": [],
@@ -15832,8 +15721,8 @@
           "keywords": [],
           "meaning_url": "https://athena.ohdsi.org/search-terms/terms/4305679"
         },
-        "OMOP:4305690": {
-          "text": "OMOP:4305690",
+        "INTRACORNEAL": {
+          "text": "INTRACORNEAL",
           "description": "Intracorneal",
           "meaning": "OMOP:4305690",
           "instantiates": [],
@@ -15842,7 +15731,6 @@
           "extensions": {},
           "annotations": {},
           "alt_descriptions": {},
-          "title": "INTRACORNEAL",
           "todos": [],
           "notes": [],
           "comments": [],
@@ -15862,8 +15750,8 @@
           "keywords": [],
           "meaning_url": "https://athena.ohdsi.org/search-terms/terms/4305690"
         },
-        "OMOP:4305834": {
-          "text": "OMOP:4305834",
+        "NASOJEJUNAL": {
+          "text": "NASOJEJUNAL",
           "description": "Nasojejunal",
           "meaning": "OMOP:4305834",
           "instantiates": [],
@@ -15872,7 +15760,6 @@
           "extensions": {},
           "annotations": {},
           "alt_descriptions": {},
-          "title": "NASOJEJUNAL",
           "todos": [],
           "notes": [],
           "comments": [],
@@ -15892,8 +15779,8 @@
           "keywords": [],
           "meaning_url": "https://athena.ohdsi.org/search-terms/terms/4305834"
         },
-        "OMOP:4305993": {
-          "text": "OMOP:4305993",
+        "INTRACISTERNAL": {
+          "text": "INTRACISTERNAL",
           "description": "Intracisternal",
           "meaning": "OMOP:4305993",
           "instantiates": [],
@@ -15902,7 +15789,6 @@
           "extensions": {},
           "annotations": {},
           "alt_descriptions": {},
-          "title": "INTRACISTERNAL",
           "todos": [],
           "notes": [],
           "comments": [],
@@ -15922,8 +15808,8 @@
           "keywords": [],
           "meaning_url": "https://athena.ohdsi.org/search-terms/terms/4305993"
         },
-        "OMOP:4306649": {
-          "text": "OMOP:4306649",
+        "SUBGINGIVAL": {
+          "text": "SUBGINGIVAL",
           "description": "Subgingival",
           "meaning": "OMOP:4306649",
           "instantiates": [],
@@ -15932,7 +15818,6 @@
           "extensions": {},
           "annotations": {},
           "alt_descriptions": {},
-          "title": "SUBGINGIVAL",
           "todos": [],
           "notes": [],
           "comments": [],
@@ -15952,8 +15837,8 @@
           "keywords": [],
           "meaning_url": "https://athena.ohdsi.org/search-terms/terms/4306649"
         },
-        "OMOP:4306657": {
-          "text": "OMOP:4306657",
+        "INTRAOVARIAN": {
+          "text": "INTRAOVARIAN",
           "description": "Intraovarian",
           "meaning": "OMOP:4306657",
           "instantiates": [],
@@ -15962,7 +15847,6 @@
           "extensions": {},
           "annotations": {},
           "alt_descriptions": {},
-          "title": "INTRAOVARIAN",
           "todos": [],
           "notes": [],
           "comments": [],
@@ -15982,8 +15866,8 @@
           "keywords": [],
           "meaning_url": "https://athena.ohdsi.org/search-terms/terms/4306657"
         },
-        "OMOP:4327128": {
-          "text": "OMOP:4327128",
+        "INTERSTITIAL": {
+          "text": "INTERSTITIAL",
           "description": "Interstitial",
           "meaning": "OMOP:4327128",
           "instantiates": [],
@@ -15992,7 +15876,6 @@
           "extensions": {},
           "annotations": {},
           "alt_descriptions": {},
-          "title": "INTERSTITIAL",
           "todos": [],
           "notes": [],
           "comments": [],
@@ -16012,8 +15895,8 @@
           "keywords": [],
           "meaning_url": "https://athena.ohdsi.org/search-terms/terms/4327128"
         },
-        "OMOP:4302352": {
-          "text": "OMOP:4302352",
+        "INTRASYNOVIAL": {
+          "text": "INTRASYNOVIAL",
           "description": "Intrasynovial",
           "meaning": "OMOP:4302352",
           "instantiates": [],
@@ -16022,7 +15905,6 @@
           "extensions": {},
           "annotations": {},
           "alt_descriptions": {},
-          "title": "INTRASYNOVIAL",
           "todos": [],
           "notes": [],
           "comments": [],
@@ -16042,8 +15924,8 @@
           "keywords": [],
           "meaning_url": "https://athena.ohdsi.org/search-terms/terms/4302352"
         },
-        "OMOP:4302354": {
-          "text": "OMOP:4302354",
+        "INTRADUODENAL": {
+          "text": "INTRADUODENAL",
           "description": "Intraduodenal",
           "meaning": "OMOP:4302354",
           "instantiates": [],
@@ -16052,7 +15934,6 @@
           "extensions": {},
           "annotations": {},
           "alt_descriptions": {},
-          "title": "INTRADUODENAL",
           "todos": [],
           "notes": [],
           "comments": [],
@@ -16072,8 +15953,8 @@
           "keywords": [],
           "meaning_url": "https://athena.ohdsi.org/search-terms/terms/4302354"
         },
-        "OMOP:4302493": {
-          "text": "OMOP:4302493",
+        "SUBTENDINOUS": {
+          "text": "SUBTENDINOUS",
           "description": "Subtendinous",
           "meaning": "OMOP:4302493",
           "instantiates": [],
@@ -16082,7 +15963,6 @@
           "extensions": {},
           "annotations": {},
           "alt_descriptions": {},
-          "title": "SUBTENDINOUS",
           "todos": [],
           "notes": [],
           "comments": [],
@@ -16102,8 +15982,8 @@
           "keywords": [],
           "meaning_url": "https://athena.ohdsi.org/search-terms/terms/4302493"
         },
-        "OMOP:4302612": {
-          "text": "OMOP:4302612",
+        "INTRAMUSCULAR": {
+          "text": "INTRAMUSCULAR",
           "description": "Intramuscular",
           "meaning": "OMOP:4302612",
           "instantiates": [],
@@ -16112,7 +15992,6 @@
           "extensions": {},
           "annotations": {},
           "alt_descriptions": {},
-          "title": "INTRAMUSCULAR",
           "todos": [],
           "notes": [],
           "comments": [],
@@ -16132,8 +16011,8 @@
           "keywords": [],
           "meaning_url": "https://athena.ohdsi.org/search-terms/terms/4302612"
         },
-        "OMOP:4302785": {
-          "text": "OMOP:4302785",
+        "INTRAVITREAL": {
+          "text": "INTRAVITREAL",
           "description": "Intravitreal",
           "meaning": "OMOP:4302785",
           "instantiates": [],
@@ -16142,7 +16021,6 @@
           "extensions": {},
           "annotations": {},
           "alt_descriptions": {},
-          "title": "INTRAVITREAL",
           "todos": [],
           "notes": [],
           "comments": [],
@@ -16162,8 +16040,8 @@
           "keywords": [],
           "meaning_url": "https://athena.ohdsi.org/search-terms/terms/4302785"
         },
-        "OMOP:4302788": {
-          "text": "OMOP:4302788",
+        "INTRASPINAL": {
+          "text": "INTRASPINAL",
           "description": "Intraspinal",
           "meaning": "OMOP:4302788",
           "instantiates": [],
@@ -16172,7 +16050,6 @@
           "extensions": {},
           "annotations": {},
           "alt_descriptions": {},
-          "title": "INTRASPINAL",
           "todos": [],
           "notes": [],
           "comments": [],
@@ -16192,8 +16069,8 @@
           "keywords": [],
           "meaning_url": "https://athena.ohdsi.org/search-terms/terms/4302788"
         },
-        "OMOP:4303263": {
-          "text": "OMOP:4303263",
+        "INTRABRONCHIAL": {
+          "text": "INTRABRONCHIAL",
           "description": "Intrabronchial",
           "meaning": "OMOP:4303263",
           "instantiates": [],
@@ -16202,7 +16079,6 @@
           "extensions": {},
           "annotations": {},
           "alt_descriptions": {},
-          "title": "INTRABRONCHIAL",
           "todos": [],
           "notes": [],
           "comments": [],
@@ -16222,8 +16098,8 @@
           "keywords": [],
           "meaning_url": "https://athena.ohdsi.org/search-terms/terms/4303263"
         },
-        "OMOP:4303277": {
-          "text": "OMOP:4303277",
+        "OROPHARYNGEAL": {
+          "text": "OROPHARYNGEAL",
           "description": "Oropharyngeal",
           "meaning": "OMOP:4303277",
           "instantiates": [],
@@ -16232,7 +16108,6 @@
           "extensions": {},
           "annotations": {},
           "alt_descriptions": {},
-          "title": "OROPHARYNGEAL",
           "todos": [],
           "notes": [],
           "comments": [],
@@ -16252,8 +16127,8 @@
           "keywords": [],
           "meaning_url": "https://athena.ohdsi.org/search-terms/terms/4303277"
         },
-        "OMOP:4303409": {
-          "text": "OMOP:4303409",
+        "INTRACAMERAL": {
+          "text": "INTRACAMERAL",
           "description": "Intracameral",
           "meaning": "OMOP:4303409",
           "instantiates": [],
@@ -16262,7 +16137,6 @@
           "extensions": {},
           "annotations": {},
           "alt_descriptions": {},
-          "title": "INTRACAMERAL",
           "todos": [],
           "notes": [],
           "comments": [],
@@ -16282,8 +16156,8 @@
           "keywords": [],
           "meaning_url": "https://athena.ohdsi.org/search-terms/terms/4303409"
         },
-        "OMOP:4303515": {
-          "text": "OMOP:4303515",
+        "PARACERVICAL": {
+          "text": "PARACERVICAL",
           "description": "Paracervical",
           "meaning": "OMOP:4303515",
           "instantiates": [],
@@ -16292,7 +16166,6 @@
           "extensions": {},
           "annotations": {},
           "alt_descriptions": {},
-          "title": "PARACERVICAL",
           "todos": [],
           "notes": [],
           "comments": [],
@@ -16312,8 +16185,8 @@
           "keywords": [],
           "meaning_url": "https://athena.ohdsi.org/search-terms/terms/4303515"
         },
-        "OMOP:4303646": {
-          "text": "OMOP:4303646",
+        "PERIURETHRAL": {
+          "text": "PERIURETHRAL",
           "description": "Periurethral",
           "meaning": "OMOP:4303646",
           "instantiates": [],
@@ -16322,7 +16195,6 @@
           "extensions": {},
           "annotations": {},
           "alt_descriptions": {},
-          "title": "PERIURETHRAL",
           "todos": [],
           "notes": [],
           "comments": [],
@@ -16342,8 +16214,8 @@
           "keywords": [],
           "meaning_url": "https://athena.ohdsi.org/search-terms/terms/4303646"
         },
-        "OMOP:4303667": {
-          "text": "OMOP:4303667",
+        "INTRACORONAL": {
+          "text": "INTRACORONAL",
           "description": "Intracoronal",
           "meaning": "OMOP:4303667",
           "instantiates": [],
@@ -16352,7 +16224,6 @@
           "extensions": {},
           "annotations": {},
           "alt_descriptions": {},
-          "title": "INTRACORONAL",
           "todos": [],
           "notes": [],
           "comments": [],
@@ -16372,8 +16243,8 @@
           "keywords": [],
           "meaning_url": "https://athena.ohdsi.org/search-terms/terms/4303667"
         },
-        "OMOP:4303673": {
-          "text": "OMOP:4303673",
+        "RETROBULBAR": {
+          "text": "RETROBULBAR",
           "description": "Retrobulbar",
           "meaning": "OMOP:4303673",
           "instantiates": [],
@@ -16382,7 +16253,6 @@
           "extensions": {},
           "annotations": {},
           "alt_descriptions": {},
-          "title": "RETROBULBAR",
           "todos": [],
           "notes": [],
           "comments": [],
@@ -16402,8 +16272,8 @@
           "keywords": [],
           "meaning_url": "https://athena.ohdsi.org/search-terms/terms/4303673"
         },
-        "OMOP:4303676": {
-          "text": "OMOP:4303676",
+        "INTRACARTILAGINOUS": {
+          "text": "INTRACARTILAGINOUS",
           "description": "Intracartilaginous",
           "meaning": "OMOP:4303676",
           "instantiates": [],
@@ -16412,7 +16282,6 @@
           "extensions": {},
           "annotations": {},
           "alt_descriptions": {},
-          "title": "INTRACARTILAGINOUS",
           "todos": [],
           "notes": [],
           "comments": [],
@@ -16432,8 +16301,8 @@
           "keywords": [],
           "meaning_url": "https://athena.ohdsi.org/search-terms/terms/4303676"
         },
-        "OMOP:4303795": {
-          "text": "OMOP:4303795",
+        "OROGASTRIC": {
+          "text": "OROGASTRIC",
           "description": "Orogastric",
           "meaning": "OMOP:4303795",
           "instantiates": [],
@@ -16442,7 +16311,6 @@
           "extensions": {},
           "annotations": {},
           "alt_descriptions": {},
-          "title": "OROGASTRIC",
           "todos": [],
           "notes": [],
           "comments": [],
@@ -16462,8 +16330,8 @@
           "keywords": [],
           "meaning_url": "https://athena.ohdsi.org/search-terms/terms/4303795"
         },
-        "OMOP:4303939": {
-          "text": "OMOP:4303939",
+        "INTRATENDINOUS": {
+          "text": "INTRATENDINOUS",
           "description": "Intratendinous",
           "meaning": "OMOP:4303939",
           "instantiates": [],
@@ -16472,7 +16340,6 @@
           "extensions": {},
           "annotations": {},
           "alt_descriptions": {},
-          "title": "INTRATENDINOUS",
           "todos": [],
           "notes": [],
           "comments": [],
@@ -16492,8 +16359,8 @@
           "keywords": [],
           "meaning_url": "https://athena.ohdsi.org/search-terms/terms/4303939"
         },
-        "OMOP:4304274": {
-          "text": "OMOP:4304274",
+        "PERIBULBAR": {
+          "text": "PERIBULBAR",
           "description": "Peribulbar",
           "meaning": "OMOP:4304274",
           "instantiates": [],
@@ -16502,7 +16369,6 @@
           "extensions": {},
           "annotations": {},
           "alt_descriptions": {},
-          "title": "PERIBULBAR",
           "todos": [],
           "notes": [],
           "comments": [],
@@ -16522,8 +16388,8 @@
           "keywords": [],
           "meaning_url": "https://athena.ohdsi.org/search-terms/terms/4304274"
         },
-        "OMOP:4304277": {
-          "text": "OMOP:4304277",
+        "FISTULA": {
+          "text": "FISTULA",
           "description": "Fistula",
           "meaning": "OMOP:4304277",
           "instantiates": [],
@@ -16532,7 +16398,6 @@
           "extensions": {},
           "annotations": {},
           "alt_descriptions": {},
-          "title": "FISTULA",
           "todos": [],
           "notes": [],
           "comments": [],
@@ -16552,8 +16417,8 @@
           "keywords": [],
           "meaning_url": "https://athena.ohdsi.org/search-terms/terms/4304277"
         },
-        "OMOP:4304412": {
-          "text": "OMOP:4304412",
+        "SURGICAL_DRAIN": {
+          "text": "SURGICAL_DRAIN",
           "description": "Surgical drain",
           "meaning": "OMOP:4304412",
           "instantiates": [],
@@ -16562,7 +16427,6 @@
           "extensions": {},
           "annotations": {},
           "alt_descriptions": {},
-          "title": "SURGICAL_DRAIN",
           "todos": [],
           "notes": [],
           "comments": [],
@@ -16582,8 +16446,8 @@
           "keywords": [],
           "meaning_url": "https://athena.ohdsi.org/search-terms/terms/4304412"
         },
-        "OMOP:4304571": {
-          "text": "OMOP:4304571",
+        "URETERAL": {
+          "text": "URETERAL",
           "description": "Ureteral",
           "meaning": "OMOP:4304571",
           "instantiates": [],
@@ -16592,7 +16456,6 @@
           "extensions": {},
           "annotations": {},
           "alt_descriptions": {},
-          "title": "URETERAL",
           "todos": [],
           "notes": [],
           "comments": [],
@@ -16612,8 +16475,8 @@
           "keywords": [],
           "meaning_url": "https://athena.ohdsi.org/search-terms/terms/4304571"
         },
-        "OMOP:35608078": {
-          "text": "OMOP:35608078",
+        "EPILESIONAL": {
+          "text": "EPILESIONAL",
           "description": "Epilesional",
           "meaning": "OMOP:35608078",
           "instantiates": [],
@@ -16622,7 +16485,6 @@
           "extensions": {},
           "annotations": {},
           "alt_descriptions": {},
-          "title": "EPILESIONAL",
           "todos": [],
           "notes": [],
           "comments": [],
@@ -16642,8 +16504,8 @@
           "keywords": [],
           "meaning_url": "https://athena.ohdsi.org/search-terms/terms/35608078"
         },
-        "OMOP:35624178": {
-          "text": "OMOP:35624178",
+        "EXTRACORPOREAL_HEMODIALYSIS": {
+          "text": "EXTRACORPOREAL_HEMODIALYSIS",
           "description": "Extracorporeal hemodialysis",
           "meaning": "OMOP:35624178",
           "instantiates": [],
@@ -16652,7 +16514,6 @@
           "extensions": {},
           "annotations": {},
           "alt_descriptions": {},
-          "title": "EXTRACORPOREAL_HEMODIALYSIS",
           "todos": [],
           "notes": [],
           "comments": [],
@@ -16672,8 +16533,8 @@
           "keywords": [],
           "meaning_url": "https://athena.ohdsi.org/search-terms/terms/35624178"
         },
-        "OMOP:37174548": {
-          "text": "OMOP:37174548",
+        "SUPRACHOROIDAL": {
+          "text": "SUPRACHOROIDAL",
           "description": "Suprachoroidal",
           "meaning": "OMOP:37174548",
           "instantiates": [],
@@ -16682,7 +16543,6 @@
           "extensions": {},
           "annotations": {},
           "alt_descriptions": {},
-          "title": "SUPRACHOROIDAL",
           "todos": [],
           "notes": [],
           "comments": [],
@@ -16702,8 +16562,8 @@
           "keywords": [],
           "meaning_url": "https://athena.ohdsi.org/search-terms/terms/37174548"
         },
-        "OMOP:37018288": {
-          "text": "OMOP:37018288",
+        "EXTRACORPOREAL": {
+          "text": "EXTRACORPOREAL",
           "description": "Extracorporeal",
           "meaning": "OMOP:37018288",
           "instantiates": [],
@@ -16712,7 +16572,6 @@
           "extensions": {},
           "annotations": {},
           "alt_descriptions": {},
-          "title": "EXTRACORPOREAL",
           "todos": [],
           "notes": [],
           "comments": [],
@@ -16732,8 +16591,8 @@
           "keywords": [],
           "meaning_url": "https://athena.ohdsi.org/search-terms/terms/37018288"
         },
-        "OMOP:37174549": {
-          "text": "OMOP:37174549",
+        "INTRACORPORUS_CAVERNOSUM": {
+          "text": "INTRACORPORUS_CAVERNOSUM",
           "description": "Intracorporus cavernosum",
           "meaning": "OMOP:37174549",
           "instantiates": [],
@@ -16742,7 +16601,6 @@
           "extensions": {},
           "annotations": {},
           "alt_descriptions": {},
-          "title": "INTRACORPORUS_CAVERNOSUM",
           "todos": [],
           "notes": [],
           "comments": [],
@@ -16762,8 +16620,8 @@
           "keywords": [],
           "meaning_url": "https://athena.ohdsi.org/search-terms/terms/37174549"
         },
-        "OMOP:37207460": {
-          "text": "OMOP:37207460",
+        "INTRAGLANDULAR": {
+          "text": "INTRAGLANDULAR",
           "description": "Intraglandular",
           "meaning": "OMOP:37207460",
           "instantiates": [],
@@ -16772,7 +16630,6 @@
           "extensions": {},
           "annotations": {},
           "alt_descriptions": {},
-          "title": "INTRAGLANDULAR",
           "todos": [],
           "notes": [],
           "comments": [],
@@ -16792,8 +16649,8 @@
           "keywords": [],
           "meaning_url": "https://athena.ohdsi.org/search-terms/terms/37207460"
         },
-        "OMOP:37207461": {
-          "text": "OMOP:37207461",
+        "INTRACHOLANGIOPANCREATIC": {
+          "text": "INTRACHOLANGIOPANCREATIC",
           "description": "Intracholangiopancreatic",
           "meaning": "OMOP:37207461",
           "instantiates": [],
@@ -16802,7 +16659,6 @@
           "extensions": {},
           "annotations": {},
           "alt_descriptions": {},
-          "title": "INTRACHOLANGIOPANCREATIC",
           "todos": [],
           "notes": [],
           "comments": [],
@@ -16822,8 +16678,8 @@
           "keywords": [],
           "meaning_url": "https://athena.ohdsi.org/search-terms/terms/37207461"
         },
-        "OMOP:37207462": {
-          "text": "OMOP:37207462",
+        "INTRAPORTAL": {
+          "text": "INTRAPORTAL",
           "description": "Intraportal",
           "meaning": "OMOP:37207462",
           "instantiates": [],
@@ -16832,7 +16688,6 @@
           "extensions": {},
           "annotations": {},
           "alt_descriptions": {},
-          "title": "INTRAPORTAL",
           "todos": [],
           "notes": [],
           "comments": [],
@@ -16852,8 +16707,8 @@
           "keywords": [],
           "meaning_url": "https://athena.ohdsi.org/search-terms/terms/37207462"
         },
-        "OMOP:37207463": {
-          "text": "OMOP:37207463",
+        "PERITUMORAL": {
+          "text": "PERITUMORAL",
           "description": "Peritumoral",
           "meaning": "OMOP:37207463",
           "instantiates": [],
@@ -16862,7 +16717,6 @@
           "extensions": {},
           "annotations": {},
           "alt_descriptions": {},
-          "title": "PERITUMORAL",
           "todos": [],
           "notes": [],
           "comments": [],
@@ -16882,8 +16736,8 @@
           "keywords": [],
           "meaning_url": "https://athena.ohdsi.org/search-terms/terms/37207463"
         },
-        "OMOP:37207464": {
-          "text": "OMOP:37207464",
+        "POSTERIOR_JUXTASCLERAL": {
+          "text": "POSTERIOR_JUXTASCLERAL",
           "description": "Posterior juxtascleral",
           "meaning": "OMOP:37207464",
           "instantiates": [],
@@ -16892,7 +16746,6 @@
           "extensions": {},
           "annotations": {},
           "alt_descriptions": {},
-          "title": "POSTERIOR_JUXTASCLERAL",
           "todos": [],
           "notes": [],
           "comments": [],
@@ -16912,8 +16765,8 @@
           "keywords": [],
           "meaning_url": "https://athena.ohdsi.org/search-terms/terms/37207464"
         },
-        "OMOP:37207465": {
-          "text": "OMOP:37207465",
+        "SUBRETINAL": {
+          "text": "SUBRETINAL",
           "description": "Subretinal",
           "meaning": "OMOP:37207465",
           "instantiates": [],
@@ -16922,7 +16775,6 @@
           "extensions": {},
           "annotations": {},
           "alt_descriptions": {},
-          "title": "SUBRETINAL",
           "todos": [],
           "notes": [],
           "comments": [],
@@ -16942,8 +16794,8 @@
           "keywords": [],
           "meaning_url": "https://athena.ohdsi.org/search-terms/terms/37207465"
         },
-        "OMOP:37397638": {
-          "text": "OMOP:37397638",
+        "INFILTRATION": {
+          "text": "INFILTRATION",
           "description": "Infiltration",
           "meaning": "OMOP:37397638",
           "instantiates": [],
@@ -16952,7 +16804,6 @@
           "extensions": {},
           "annotations": {},
           "alt_descriptions": {},
-          "title": "INFILTRATION",
           "todos": [],
           "notes": [],
           "comments": [],
@@ -16972,8 +16823,8 @@
           "keywords": [],
           "meaning_url": "https://athena.ohdsi.org/search-terms/terms/37397638"
         },
-        "OMOP:40487850": {
-          "text": "OMOP:40487850",
+        "TRANSENDOCARDIAL": {
+          "text": "TRANSENDOCARDIAL",
           "description": "Transendocardial",
           "meaning": "OMOP:40487850",
           "instantiates": [],
@@ -16982,7 +16833,6 @@
           "extensions": {},
           "annotations": {},
           "alt_descriptions": {},
-          "title": "TRANSENDOCARDIAL",
           "todos": [],
           "notes": [],
           "comments": [],
@@ -17002,8 +16852,8 @@
           "keywords": [],
           "meaning_url": "https://athena.ohdsi.org/search-terms/terms/40487850"
         },
-        "OMOP:40487858": {
-          "text": "OMOP:40487858",
+        "TRANSPLACENTAL": {
+          "text": "TRANSPLACENTAL",
           "description": "Transplacental",
           "meaning": "OMOP:40487858",
           "instantiates": [],
@@ -17012,7 +16862,6 @@
           "extensions": {},
           "annotations": {},
           "alt_descriptions": {},
-          "title": "TRANSPLACENTAL",
           "todos": [],
           "notes": [],
           "comments": [],
@@ -17032,8 +16881,8 @@
           "keywords": [],
           "meaning_url": "https://athena.ohdsi.org/search-terms/terms/40487858"
         },
-        "OMOP:40487983": {
-          "text": "OMOP:40487983",
+        "INTRAEPIDERMAL": {
+          "text": "INTRAEPIDERMAL",
           "description": "Intraepidermal",
           "meaning": "OMOP:40487983",
           "instantiates": [],
@@ -17042,7 +16891,6 @@
           "extensions": {},
           "annotations": {},
           "alt_descriptions": {},
-          "title": "INTRAEPIDERMAL",
           "todos": [],
           "notes": [],
           "comments": [],
@@ -17062,8 +16910,8 @@
           "keywords": [],
           "meaning_url": "https://athena.ohdsi.org/search-terms/terms/40487983"
         },
-        "OMOP:40488317": {
-          "text": "OMOP:40488317",
+        "INTRACEREBRAL": {
+          "text": "INTRACEREBRAL",
           "description": "Intracerebral",
           "meaning": "OMOP:40488317",
           "instantiates": [],
@@ -17072,7 +16920,6 @@
           "extensions": {},
           "annotations": {},
           "alt_descriptions": {},
-          "title": "INTRACEREBRAL",
           "todos": [],
           "notes": [],
           "comments": [],
@@ -17092,8 +16939,8 @@
           "keywords": [],
           "meaning_url": "https://athena.ohdsi.org/search-terms/terms/40488317"
         },
-        "OMOP:40489989": {
-          "text": "OMOP:40489989",
+        "INTRAJEJUNAL": {
+          "text": "INTRAJEJUNAL",
           "description": "Intrajejunal",
           "meaning": "OMOP:40489989",
           "instantiates": [],
@@ -17102,7 +16949,6 @@
           "extensions": {},
           "annotations": {},
           "alt_descriptions": {},
-          "title": "INTRAJEJUNAL",
           "todos": [],
           "notes": [],
           "comments": [],
@@ -17122,8 +16968,8 @@
           "keywords": [],
           "meaning_url": "https://athena.ohdsi.org/search-terms/terms/40489989"
         },
-        "OMOP:40489990": {
-          "text": "OMOP:40489990",
+        "INTRACOLONIC": {
+          "text": "INTRACOLONIC",
           "description": "Intracolonic",
           "meaning": "OMOP:40489990",
           "instantiates": [],
@@ -17132,7 +16978,6 @@
           "extensions": {},
           "annotations": {},
           "alt_descriptions": {},
-          "title": "INTRACOLONIC",
           "todos": [],
           "notes": [],
           "comments": [],
@@ -17152,8 +16997,8 @@
           "keywords": [],
           "meaning_url": "https://athena.ohdsi.org/search-terms/terms/40489990"
         },
-        "OMOP:40490507": {
-          "text": "OMOP:40490507",
+        "CUTANEOUS": {
+          "text": "CUTANEOUS",
           "description": "Cutaneous",
           "meaning": "OMOP:40490507",
           "instantiates": [],
@@ -17162,7 +17007,6 @@
           "extensions": {},
           "annotations": {},
           "alt_descriptions": {},
-          "title": "CUTANEOUS",
           "todos": [],
           "notes": [],
           "comments": [],
@@ -17182,8 +17026,8 @@
           "keywords": [],
           "meaning_url": "https://athena.ohdsi.org/search-terms/terms/40490507"
         },
-        "OMOP:40490837": {
-          "text": "OMOP:40490837",
+        "INTRAILEAL": {
+          "text": "INTRAILEAL",
           "description": "Intraileal",
           "meaning": "OMOP:40490837",
           "instantiates": [],
@@ -17192,7 +17036,6 @@
           "extensions": {},
           "annotations": {},
           "alt_descriptions": {},
-          "title": "INTRAILEAL",
           "todos": [],
           "notes": [],
           "comments": [],
@@ -17212,8 +17055,8 @@
           "keywords": [],
           "meaning_url": "https://athena.ohdsi.org/search-terms/terms/40490837"
         },
-        "OMOP:40490866": {
-          "text": "OMOP:40490866",
+        "PERIODONTAL": {
+          "text": "PERIODONTAL",
           "description": "Periodontal",
           "meaning": "OMOP:40490866",
           "instantiates": [],
@@ -17222,7 +17065,6 @@
           "extensions": {},
           "annotations": {},
           "alt_descriptions": {},
-          "title": "PERIODONTAL",
           "todos": [],
           "notes": [],
           "comments": [],
@@ -17242,8 +17084,8 @@
           "keywords": [],
           "meaning_url": "https://athena.ohdsi.org/search-terms/terms/40490866"
         },
-        "OMOP:40490896": {
-          "text": "OMOP:40490896",
+        "PERIDURAL": {
+          "text": "PERIDURAL",
           "description": "Peridural",
           "meaning": "OMOP:40490896",
           "instantiates": [],
@@ -17252,7 +17094,6 @@
           "extensions": {},
           "annotations": {},
           "alt_descriptions": {},
-          "title": "PERIDURAL",
           "todos": [],
           "notes": [],
           "comments": [],
@@ -17272,8 +17113,8 @@
           "keywords": [],
           "meaning_url": "https://athena.ohdsi.org/search-terms/terms/40490896"
         },
-        "OMOP:40490898": {
-          "text": "OMOP:40490898",
+        "LOWER_RESPIRATORY_TRACT": {
+          "text": "LOWER_RESPIRATORY_TRACT",
           "description": "Lower respiratory tract",
           "meaning": "OMOP:40490898",
           "instantiates": [],
@@ -17282,7 +17123,6 @@
           "extensions": {},
           "annotations": {},
           "alt_descriptions": {},
-          "title": "LOWER_RESPIRATORY_TRACT",
           "todos": [],
           "notes": [],
           "comments": [],
@@ -17302,8 +17142,8 @@
           "keywords": [],
           "meaning_url": "https://athena.ohdsi.org/search-terms/terms/40490898"
         },
-        "OMOP:40491321": {
-          "text": "OMOP:40491321",
+        "INTRAMAMMARY": {
+          "text": "INTRAMAMMARY",
           "description": "Intramammary",
           "meaning": "OMOP:40491321",
           "instantiates": [],
@@ -17312,7 +17152,6 @@
           "extensions": {},
           "annotations": {},
           "alt_descriptions": {},
-          "title": "INTRAMAMMARY",
           "todos": [],
           "notes": [],
           "comments": [],
@@ -17332,8 +17171,8 @@
           "keywords": [],
           "meaning_url": "https://athena.ohdsi.org/search-terms/terms/40491321"
         },
-        "OMOP:40491322": {
-          "text": "OMOP:40491322",
+        "INTRATUMOR": {
+          "text": "INTRATUMOR",
           "description": "Intratumor",
           "meaning": "OMOP:40491322",
           "instantiates": [],
@@ -17342,7 +17181,6 @@
           "extensions": {},
           "annotations": {},
           "alt_descriptions": {},
-          "title": "INTRATUMOR",
           "todos": [],
           "notes": [],
           "comments": [],
@@ -17362,8 +17200,8 @@
           "keywords": [],
           "meaning_url": "https://athena.ohdsi.org/search-terms/terms/40491322"
         },
-        "OMOP:40491830": {
-          "text": "OMOP:40491830",
+        "TRANSTYMPANIC": {
+          "text": "TRANSTYMPANIC",
           "description": "Transtympanic",
           "meaning": "OMOP:40491830",
           "instantiates": [],
@@ -17372,7 +17210,6 @@
           "extensions": {},
           "annotations": {},
           "alt_descriptions": {},
-          "title": "TRANSTYMPANIC",
           "todos": [],
           "notes": [],
           "comments": [],
@@ -17392,8 +17229,8 @@
           "keywords": [],
           "meaning_url": "https://athena.ohdsi.org/search-terms/terms/40491830"
         },
-        "OMOP:40491832": {
-          "text": "OMOP:40491832",
+        "TRANSTRACHEAL": {
+          "text": "TRANSTRACHEAL",
           "description": "Transtracheal",
           "meaning": "OMOP:40491832",
           "instantiates": [],
@@ -17402,7 +17239,6 @@
           "extensions": {},
           "annotations": {},
           "alt_descriptions": {},
-          "title": "TRANSTRACHEAL",
           "todos": [],
           "notes": [],
           "comments": [],
@@ -17422,8 +17258,8 @@
           "keywords": [],
           "meaning_url": "https://athena.ohdsi.org/search-terms/terms/40491832"
         },
-        "OMOP:40492284": {
-          "text": "OMOP:40492284",
+        "INTRAESOPHAGEAL": {
+          "text": "INTRAESOPHAGEAL",
           "description": "Intraesophageal",
           "meaning": "OMOP:40492284",
           "instantiates": [],
@@ -17432,7 +17268,6 @@
           "extensions": {},
           "annotations": {},
           "alt_descriptions": {},
-          "title": "INTRAESOPHAGEAL",
           "todos": [],
           "notes": [],
           "comments": [],
@@ -17452,8 +17287,8 @@
           "keywords": [],
           "meaning_url": "https://athena.ohdsi.org/search-terms/terms/40492284"
         },
-        "OMOP:40492286": {
-          "text": "OMOP:40492286",
+        "INTRAGINGIVAL": {
+          "text": "INTRAGINGIVAL",
           "description": "Intragingival",
           "meaning": "OMOP:40492286",
           "instantiates": [],
@@ -17462,7 +17297,6 @@
           "extensions": {},
           "annotations": {},
           "alt_descriptions": {},
-          "title": "INTRAGINGIVAL",
           "todos": [],
           "notes": [],
           "comments": [],
@@ -17482,8 +17316,8 @@
           "keywords": [],
           "meaning_url": "https://athena.ohdsi.org/search-terms/terms/40492286"
         },
-        "OMOP:40492287": {
-          "text": "OMOP:40492287",
+        "INTRAVASCULAR": {
+          "text": "INTRAVASCULAR",
           "description": "Intravascular",
           "meaning": "OMOP:40492287",
           "instantiates": [],
@@ -17492,7 +17326,6 @@
           "extensions": {},
           "annotations": {},
           "alt_descriptions": {},
-          "title": "INTRAVASCULAR",
           "todos": [],
           "notes": [],
           "comments": [],
@@ -17512,8 +17345,8 @@
           "keywords": [],
           "meaning_url": "https://athena.ohdsi.org/search-terms/terms/40492287"
         },
-        "OMOP:40492288": {
-          "text": "OMOP:40492288",
+        "INTRADURAL": {
+          "text": "INTRADURAL",
           "description": "Intradural",
           "meaning": "OMOP:40492288",
           "instantiates": [],
@@ -17522,7 +17355,6 @@
           "extensions": {},
           "annotations": {},
           "alt_descriptions": {},
-          "title": "INTRADURAL",
           "todos": [],
           "notes": [],
           "comments": [],
@@ -17542,8 +17374,8 @@
           "keywords": [],
           "meaning_url": "https://athena.ohdsi.org/search-terms/terms/40492288"
         },
-        "OMOP:40492300": {
-          "text": "OMOP:40492300",
+        "INTRAMENINGEAL": {
+          "text": "INTRAMENINGEAL",
           "description": "Intrameningeal",
           "meaning": "OMOP:40492300",
           "instantiates": [],
@@ -17552,7 +17384,6 @@
           "extensions": {},
           "annotations": {},
           "alt_descriptions": {},
-          "title": "INTRAMENINGEAL",
           "todos": [],
           "notes": [],
           "comments": [],
@@ -17572,8 +17403,8 @@
           "keywords": [],
           "meaning_url": "https://athena.ohdsi.org/search-terms/terms/40492300"
         },
-        "OMOP:40492301": {
-          "text": "OMOP:40492301",
+        "INTRAGASTRIC": {
+          "text": "INTRAGASTRIC",
           "description": "Intragastric",
           "meaning": "OMOP:40492301",
           "instantiates": [],
@@ -17582,7 +17413,6 @@
           "extensions": {},
           "annotations": {},
           "alt_descriptions": {},
-          "title": "INTRAGASTRIC",
           "todos": [],
           "notes": [],
           "comments": [],
@@ -17602,8 +17432,8 @@
           "keywords": [],
           "meaning_url": "https://athena.ohdsi.org/search-terms/terms/40492301"
         },
-        "OMOP:40492305": {
-          "text": "OMOP:40492305",
+        "INTRAPERICARDIAL": {
+          "text": "INTRAPERICARDIAL",
           "description": "Intrapericardial",
           "meaning": "OMOP:40492305",
           "instantiates": [],
@@ -17612,7 +17442,6 @@
           "extensions": {},
           "annotations": {},
           "alt_descriptions": {},
-          "title": "INTRAPERICARDIAL",
           "todos": [],
           "notes": [],
           "comments": [],
@@ -17632,8 +17461,8 @@
           "keywords": [],
           "meaning_url": "https://athena.ohdsi.org/search-terms/terms/40492305"
         },
-        "OMOP:40493227": {
-          "text": "OMOP:40493227",
+        "INTRALINGUAL": {
+          "text": "INTRALINGUAL",
           "description": "Intralingual",
           "meaning": "OMOP:40493227",
           "instantiates": [],
@@ -17642,7 +17471,6 @@
           "extensions": {},
           "annotations": {},
           "alt_descriptions": {},
-          "title": "INTRALINGUAL",
           "todos": [],
           "notes": [],
           "comments": [],
@@ -17662,8 +17490,8 @@
           "keywords": [],
           "meaning_url": "https://athena.ohdsi.org/search-terms/terms/40493227"
         },
-        "OMOP:40486069": {
-          "text": "OMOP:40486069",
+        "RESPIRATORY_TRACT": {
+          "text": "RESPIRATORY_TRACT",
           "description": "Respiratory tract",
           "meaning": "OMOP:40486069",
           "instantiates": [],
@@ -17672,7 +17500,6 @@
           "extensions": {},
           "annotations": {},
           "alt_descriptions": {},
-          "title": "RESPIRATORY_TRACT",
           "todos": [],
           "notes": [],
           "comments": [],
@@ -17692,8 +17519,8 @@
           "keywords": [],
           "meaning_url": "https://athena.ohdsi.org/search-terms/terms/40486069"
         },
-        "OMOP:40493258": {
-          "text": "OMOP:40493258",
+        "INTRAHEPATIC": {
+          "text": "INTRAHEPATIC",
           "description": "Intrahepatic",
           "meaning": "OMOP:40493258",
           "instantiates": [],
@@ -17702,7 +17529,6 @@
           "extensions": {},
           "annotations": {},
           "alt_descriptions": {},
-          "title": "INTRAHEPATIC",
           "todos": [],
           "notes": [],
           "comments": [],
@@ -17722,8 +17548,8 @@
           "keywords": [],
           "meaning_url": "https://athena.ohdsi.org/search-terms/terms/40493258"
         },
-        "OMOP:40486444": {
-          "text": "OMOP:40486444",
+        "CONJUNCTIVAL": {
+          "text": "CONJUNCTIVAL",
           "description": "Conjunctival",
           "meaning": "OMOP:40486444",
           "instantiates": [],
@@ -17732,7 +17558,6 @@
           "extensions": {},
           "annotations": {},
           "alt_descriptions": {},
-          "title": "CONJUNCTIVAL",
           "todos": [],
           "notes": [],
           "comments": [],
@@ -17752,8 +17577,8 @@
           "keywords": [],
           "meaning_url": "https://athena.ohdsi.org/search-terms/terms/40486444"
         },
-        "OMOP:40487473": {
-          "text": "OMOP:40487473",
+        "INTRAEPICARDIAL": {
+          "text": "INTRAEPICARDIAL",
           "description": "Intraepicardial",
           "meaning": "OMOP:40487473",
           "instantiates": [],
@@ -17762,7 +17587,6 @@
           "extensions": {},
           "annotations": {},
           "alt_descriptions": {},
-          "title": "INTRAEPICARDIAL",
           "todos": [],
           "notes": [],
           "comments": [],
@@ -17782,8 +17606,8 @@
           "keywords": [],
           "meaning_url": "https://athena.ohdsi.org/search-terms/terms/40487473"
         },
-        "OMOP:40487501": {
-          "text": "OMOP:40487501",
+        "DIGESTIVE_TRACT": {
+          "text": "DIGESTIVE_TRACT",
           "description": "Digestive tract",
           "meaning": "OMOP:40487501",
           "instantiates": [],
@@ -17792,7 +17616,6 @@
           "extensions": {},
           "annotations": {},
           "alt_descriptions": {},
-          "title": "DIGESTIVE_TRACT",
           "todos": [],
           "notes": [],
           "comments": [],
@@ -17812,8 +17635,8 @@
           "keywords": [],
           "meaning_url": "https://athena.ohdsi.org/search-terms/terms/40487501"
         },
-        "OMOP:40549429": {
-          "text": "OMOP:40549429",
+        "OCULAR": {
+          "text": "OCULAR",
           "description": "Ocular",
           "meaning": "OMOP:40549429",
           "instantiates": [],
@@ -17822,7 +17645,6 @@
           "extensions": {},
           "annotations": {},
           "alt_descriptions": {},
-          "title": "OCULAR",
           "todos": [],
           "notes": [],
           "comments": [],
@@ -20333,7 +20155,6 @@
     "AnalyteTypeEnum": {
       "id": "AnalyteTypeEnum",
       "name": "AnalyteTypeEnum",
-      "description": "The type of molecular analyte extracted or derived from a specimen.",
       "permissible_values": {
         "FFPE_DNA": {
           "text": "FFPE_DNA",
@@ -20691,7 +20512,6 @@
     "SourceMaterialTypeEnum": {
       "id": "SourceMaterialTypeEnum",
       "name": "SourceMaterialTypeEnum",
-      "description": "The type of biological source material a specimen represents.",
       "permissible_values": {
         "ADDITIONAL_METASTATIC": {
           "text": "ADDITIONAL_METASTATIC",
@@ -22197,7 +22017,6 @@
     "SpecimenCollectionMethodType": {
       "id": "SpecimenCollectionMethodType",
       "name": "SpecimenCollectionMethodType",
-      "description": "The method or procedure by which a specimen was collected.",
       "permissible_values": {
         "ORCHIECTOMY": {
           "text": "ORCHIECTOMY",
@@ -25285,7 +25104,7 @@
       "name": "UnitOfMeasurementEnum",
       "description": "Standard units of measurement from the [Units of Measurement (UOM) ontology](https://units-of-measurement.org/). Units-of-measurement (UOM) provides URLs for Unified Code for Units of Measure (UCUM) codes, and mappings to a number of units ontologies and systems, in human- and machine-readable linked data formats.",
       "reachable_from": {
-        "source_ontology": "UCUM"
+        "source_ontology": "UOM"
       }
     },
     "GravityDomainEnum": {
@@ -25840,8 +25659,8 @@
       "name": "ConditionSeverityEnum",
       "description": "The clinical severity level assigned to a condition or diagnosis.",
       "permissible_values": {
-        "OMOP:4116992": {
-          "text": "OMOP:4116992",
+        "MILD": {
+          "text": "MILD",
           "description": "A condition that causes minimal symptoms or functional impairment and typically does not require intensive intervention.",
           "meaning": "OMOP:4116992",
           "instantiates": [],
@@ -25850,7 +25669,6 @@
           "extensions": {},
           "annotations": {},
           "alt_descriptions": {},
-          "title": "MILD",
           "todos": [],
           "notes": [],
           "comments": [],
@@ -25870,17 +25688,16 @@
           "keywords": [],
           "meaning_url": "https://athena.ohdsi.org/search-terms/terms/4116992"
         },
-        "OMOP:4285732": {
-          "text": "OMOP:4285732",
+        "MODERATE": {
+          "text": "MODERATE",
           "description": "A condition that causes noticeable symptoms or functional impairment and may require active treatment or monitoring.",
-          "meaning": "OMOP:4285732",
+          "meaning": "OMOP:3272197",
           "instantiates": [],
           "implements": [],
           "mixins": [],
           "extensions": {},
           "annotations": {},
           "alt_descriptions": {},
-          "title": "MODERATE",
           "todos": [],
           "notes": [],
           "comments": [],
@@ -25898,10 +25715,10 @@
           "contributors": [],
           "categories": [],
           "keywords": [],
-          "meaning_url": "https://athena.ohdsi.org/search-terms/terms/4285732"
+          "meaning_url": "https://athena.ohdsi.org/search-terms/terms/3272197"
         },
-        "OMOP:4087703": {
-          "text": "OMOP:4087703",
+        "SEVERE": {
+          "text": "SEVERE",
           "description": "A condition that causes significant symptoms or functional impairment, often requiring urgent or intensive intervention.",
           "meaning": "OMOP:4087703",
           "instantiates": [],
@@ -25910,7 +25727,6 @@
           "extensions": {},
           "annotations": {},
           "alt_descriptions": {},
-          "title": "SEVERE",
           "todos": [],
           "notes": [],
           "comments": [],
@@ -25937,17 +25753,15 @@
       "name": "FamilyRelationshipEnum",
       "description": "Values describing the relationship between an individual and family members.",
       "permissible_values": {
-        "OMOP:45884467": {
-          "text": "OMOP:45884467",
+        "ONESELF": {
+          "text": "ONESELF",
           "description": "A relation to one's self.",
-          "meaning": "OMOP:45884467",
           "instantiates": [],
           "implements": [],
           "mixins": [],
           "extensions": {},
           "annotations": {},
           "alt_descriptions": {},
-          "title": "ONESELF",
           "todos": [],
           "notes": [],
           "comments": [],
@@ -25964,11 +25778,10 @@
           "broad_mappings": [],
           "contributors": [],
           "categories": [],
-          "keywords": [],
-          "meaning_url": "https://athena.ohdsi.org/search-terms/terms/45884467"
+          "keywords": []
         },
-        "OMOP:4029630": {
-          "text": "OMOP:4029630",
+        "NATURAL_PARENT": {
+          "text": "NATURAL_PARENT",
           "description": "A relation to a natural parent (mother or father) when otherwise not specified.",
           "meaning": "OMOP:4029630",
           "instantiates": [],
@@ -25977,7 +25790,6 @@
           "extensions": {},
           "annotations": {},
           "alt_descriptions": {},
-          "title": "NATURAL_PARENT",
           "todos": [],
           "notes": [],
           "comments": [],
@@ -25997,8 +25809,8 @@
           "keywords": [],
           "meaning_url": "https://athena.ohdsi.org/search-terms/terms/4029630"
         },
-        "OMOP:4321888": {
-          "text": "OMOP:4321888",
+        "NATURAL_FATHER": {
+          "text": "NATURAL_FATHER",
           "description": "A relation to a natural father.",
           "meaning": "OMOP:4321888",
           "instantiates": [],
@@ -26007,7 +25819,6 @@
           "extensions": {},
           "annotations": {},
           "alt_descriptions": {},
-          "title": "NATURAL_FATHER",
           "todos": [],
           "notes": [],
           "comments": [],
@@ -26027,8 +25838,8 @@
           "keywords": [],
           "meaning_url": "https://athena.ohdsi.org/search-terms/terms/4321888"
         },
-        "OMOP:4277283": {
-          "text": "OMOP:4277283",
+        "NATURAL_MOTHER": {
+          "text": "NATURAL_MOTHER",
           "description": "A relation to a natural mother.",
           "meaning": "OMOP:4277283",
           "instantiates": [],
@@ -26037,7 +25848,6 @@
           "extensions": {},
           "annotations": {},
           "alt_descriptions": {},
-          "title": "NATURAL_MOTHER",
           "todos": [],
           "notes": [],
           "comments": [],
@@ -26057,8 +25867,8 @@
           "keywords": [],
           "meaning_url": "https://athena.ohdsi.org/search-terms/terms/4277283"
         },
-        "OMOP:4218412": {
-          "text": "OMOP:4218412",
+        "NATURAL_SIBLING": {
+          "text": "NATURAL_SIBLING",
           "description": "A relation to a natural sibling (sister or brother) when otherwise not specified.",
           "meaning": "OMOP:4218412",
           "instantiates": [],
@@ -26067,7 +25877,6 @@
           "extensions": {},
           "annotations": {},
           "alt_descriptions": {},
-          "title": "NATURAL_SIBLING",
           "todos": [],
           "notes": [],
           "comments": [],
@@ -26087,8 +25896,8 @@
           "keywords": [],
           "meaning_url": "https://athena.ohdsi.org/search-terms/terms/4218412"
         },
-        "OMOP:4263682": {
-          "text": "OMOP:4263682",
+        "NATURAL_BROTHER": {
+          "text": "NATURAL_BROTHER",
           "description": "A relation to a natural brother.",
           "meaning": "OMOP:4263682",
           "instantiates": [],
@@ -26097,7 +25906,6 @@
           "extensions": {},
           "annotations": {},
           "alt_descriptions": {},
-          "title": "NATURAL_BROTHER",
           "todos": [],
           "notes": [],
           "comments": [],
@@ -26117,8 +25925,8 @@
           "keywords": [],
           "meaning_url": "https://athena.ohdsi.org/search-terms/terms/4263682"
         },
-        "OMOP:4251326": {
-          "text": "OMOP:4251326",
+        "NATURAL_SISTER": {
+          "text": "NATURAL_SISTER",
           "description": "A relation to a natural sister.",
           "meaning": "OMOP:4251326",
           "instantiates": [],
@@ -26127,7 +25935,6 @@
           "extensions": {},
           "annotations": {},
           "alt_descriptions": {},
-          "title": "NATURAL_SISTER",
           "todos": [],
           "notes": [],
           "comments": [],
@@ -26147,8 +25954,8 @@
           "keywords": [],
           "meaning_url": "https://athena.ohdsi.org/search-terms/terms/4251326"
         },
-        "OMOP:4326600": {
-          "text": "OMOP:4326600",
+        "NATURAL_CHILD": {
+          "text": "NATURAL_CHILD",
           "description": "A relation to a natural child.",
           "meaning": "OMOP:4326600",
           "instantiates": [],
@@ -26157,7 +25964,6 @@
           "extensions": {},
           "annotations": {},
           "alt_descriptions": {},
-          "title": "NATURAL_CHILD",
           "todos": [],
           "notes": [],
           "comments": [],
@@ -26177,8 +25983,8 @@
           "keywords": [],
           "meaning_url": "https://athena.ohdsi.org/search-terms/terms/4326600"
         },
-        "OMOP:4053608": {
-          "text": "OMOP:4053608",
+        "BLOOD_RELATIVE": {
+          "text": "BLOOD_RELATIVE",
           "description": "A generic blood relation.",
           "meaning": "OMOP:4053608",
           "instantiates": [],
@@ -26187,7 +25993,6 @@
           "extensions": {},
           "annotations": {},
           "alt_descriptions": {},
-          "title": "BLOOD_RELATIVE",
           "todos": [],
           "notes": [],
           "comments": [],
@@ -33085,7 +32890,7 @@
           "contributors": [],
           "categories": [],
           "keywords": [],
-          "meaning_url": "http://identifiers.org/efo/0009188"
+          "meaning_url": "http://www.ebi.ac.uk/efo/EFO_0009188"
         },
         "EFO:0020080": {
           "text": "EFO:0020080",
@@ -33114,7 +32919,7 @@
           "contributors": [],
           "categories": [],
           "keywords": [],
-          "meaning_url": "http://identifiers.org/efo/0020080"
+          "meaning_url": "http://www.ebi.ac.uk/efo/EFO_0020080"
         },
         "OBA:VT0000183": {
           "text": "OBA:VT0000183",
@@ -35617,8 +35422,8 @@
       "name": "EducationalAttainmentObservationTypeEnum",
       "description": "Values describing the types of Education Attainment observed in an Observation.",
       "permissible_values": {
-        "OMOP:1990362": {
-          "text": "OMOP:1990362",
+        "8TH_GRADE_OR_LESS": {
+          "text": "8TH_GRADE_OR_LESS",
           "meaning": "OMOP:1990362",
           "instantiates": [],
           "implements": [],
@@ -35626,7 +35431,6 @@
           "extensions": {},
           "annotations": {},
           "alt_descriptions": {},
-          "title": "8TH_GRADE_OR_LESS",
           "todos": [],
           "notes": [],
           "comments": [],
@@ -35646,8 +35450,8 @@
           "keywords": [],
           "meaning_url": "https://athena.ohdsi.org/search-terms/terms/1990362"
         },
-        "OMOP:1990281": {
-          "text": "OMOP:1990281",
+        "HIGH_SCHOOL_NO_DIPLOMA": {
+          "text": "HIGH_SCHOOL_NO_DIPLOMA",
           "meaning": "OMOP:1990281",
           "instantiates": [],
           "implements": [],
@@ -35655,7 +35459,6 @@
           "extensions": {},
           "annotations": {},
           "alt_descriptions": {},
-          "title": "HIGH_SCHOOL_NO_DIPLOMA",
           "todos": [],
           "notes": [],
           "comments": [],
@@ -35675,8 +35478,8 @@
           "keywords": [],
           "meaning_url": "https://athena.ohdsi.org/search-terms/terms/1990281"
         },
-        "OMOP:37079292": {
-          "text": "OMOP:37079292",
+        "HIGH_SCHOOL_GRADUATE_GED": {
+          "text": "HIGH_SCHOOL_GRADUATE_GED",
           "meaning": "OMOP:37079292",
           "instantiates": [],
           "implements": [],
@@ -35684,7 +35487,6 @@
           "extensions": {},
           "annotations": {},
           "alt_descriptions": {},
-          "title": "HIGH_SCHOOL_GRADUATE_GED",
           "todos": [],
           "notes": [],
           "comments": [],
@@ -35704,8 +35506,8 @@
           "keywords": [],
           "meaning_url": "https://athena.ohdsi.org/search-terms/terms/37079292"
         },
-        "OMOP:45882538": {
-          "text": "OMOP:45882538",
+        "SOME_COLLEGE_OR_TECH_NO_DEGREE": {
+          "text": "SOME_COLLEGE_OR_TECH_NO_DEGREE",
           "meaning": "OMOP:45882538",
           "instantiates": [],
           "implements": [],
@@ -35713,7 +35515,6 @@
           "extensions": {},
           "annotations": {},
           "alt_descriptions": {},
-          "title": "SOME_COLLEGE_OR_TECH_NO_DEGREE",
           "todos": [],
           "notes": [],
           "comments": [],
@@ -35733,8 +35534,8 @@
           "keywords": [],
           "meaning_url": "https://athena.ohdsi.org/search-terms/terms/45882538"
         },
-        "OMOP:45884846": {
-          "text": "OMOP:45884846",
+        "COLLEGE_OR_TECH_WITH_DEGREE": {
+          "text": "COLLEGE_OR_TECH_WITH_DEGREE",
           "meaning": "OMOP:45884846",
           "instantiates": [],
           "implements": [],
@@ -35742,7 +35543,6 @@
           "extensions": {},
           "annotations": {},
           "alt_descriptions": {},
-          "title": "COLLEGE_OR_TECH_WITH_DEGREE",
           "todos": [],
           "notes": [],
           "comments": [],
@@ -35762,8 +35562,8 @@
           "keywords": [],
           "meaning_url": "https://athena.ohdsi.org/search-terms/terms/45884846"
         },
-        "OMOP:45880652": {
-          "text": "OMOP:45880652",
+        "MASTERS_OR_DOCTORAL_DEGREE": {
+          "text": "MASTERS_OR_DOCTORAL_DEGREE",
           "meaning": "OMOP:45880652",
           "instantiates": [],
           "implements": [],
@@ -35771,7 +35571,6 @@
           "extensions": {},
           "annotations": {},
           "alt_descriptions": {},
-          "title": "MASTERS_OR_DOCTORAL_DEGREE",
           "todos": [],
           "notes": [],
           "comments": [],
@@ -35791,17 +35590,15 @@
           "keywords": [],
           "meaning_url": "https://athena.ohdsi.org/search-terms/terms/45880652"
         },
-        "OMOP:45877986": {
-          "text": "OMOP:45877986",
+        "UNKNOWN": {
+          "text": "UNKNOWN",
           "description": "Educational attainment is unknown or not reported.",
-          "meaning": "OMOP:45877986",
           "instantiates": [],
           "implements": [],
           "mixins": [],
           "extensions": {},
           "annotations": {},
           "alt_descriptions": {},
-          "title": "UNKNOWN",
           "todos": [],
           "notes": [],
           "comments": [],
@@ -35818,11 +35615,10 @@
           "broad_mappings": [],
           "contributors": [],
           "categories": [],
-          "keywords": [],
-          "meaning_url": "https://athena.ohdsi.org/search-terms/terms/45877986"
+          "keywords": []
         },
-        "OMOP:37079441": {
-          "text": "OMOP:37079441",
+        "GREATER_THAN_HIGH_SCHOOL_OR_EQUIVALENT": {
+          "text": "GREATER_THAN_HIGH_SCHOOL_OR_EQUIVALENT",
           "meaning": "OMOP:37079441",
           "instantiates": [],
           "implements": [],
@@ -35830,7 +35626,6 @@
           "extensions": {},
           "annotations": {},
           "alt_descriptions": {},
-          "title": "GREATER_THAN_HIGH_SCHOOL_OR_EQUIVALENT",
           "todos": [],
           "notes": [],
           "comments": [],
@@ -35857,8 +35652,8 @@
       "name": "SmokingStatusObservationTypeEnum",
       "description": "Values describing the types of Smoking Status observed in an Observation.",
       "permissible_values": {
-        "OMOP:40766945": {
-          "text": "OMOP:40766945",
+        "CURRENT_SMOKER": {
+          "text": "CURRENT_SMOKER",
           "meaning": "OMOP:40766945",
           "instantiates": [],
           "implements": [],
@@ -35866,7 +35661,6 @@
           "extensions": {},
           "annotations": {},
           "alt_descriptions": {},
-          "title": "CURRENT_SMOKER",
           "todos": [],
           "notes": [],
           "comments": [],
@@ -35886,8 +35680,8 @@
           "keywords": [],
           "meaning_url": "https://athena.ohdsi.org/search-terms/terms/40766945"
         },
-        "OMOP:45883458": {
-          "text": "OMOP:45883458",
+        "FORMER_SMOKER": {
+          "text": "FORMER_SMOKER",
           "meaning": "OMOP:45883458",
           "instantiates": [],
           "implements": [],
@@ -35895,7 +35689,6 @@
           "extensions": {},
           "annotations": {},
           "alt_descriptions": {},
-          "title": "FORMER_SMOKER",
           "todos": [],
           "notes": [],
           "comments": [],
@@ -35915,8 +35708,8 @@
           "keywords": [],
           "meaning_url": "https://athena.ohdsi.org/search-terms/terms/45883458"
         },
-        "OMOP:45883537": {
-          "text": "OMOP:45883537",
+        "NEVER_SMOKED": {
+          "text": "NEVER_SMOKED",
           "meaning": "OMOP:45883537",
           "instantiates": [],
           "implements": [],
@@ -35924,7 +35717,6 @@
           "extensions": {},
           "annotations": {},
           "alt_descriptions": {},
-          "title": "NEVER_SMOKED",
           "todos": [],
           "notes": [],
           "comments": [],
@@ -35944,8 +35736,8 @@
           "keywords": [],
           "meaning_url": "https://athena.ohdsi.org/search-terms/terms/45883537"
         },
-        "OMOP:45885135": {
-          "text": "OMOP:45885135",
+        "UNKNOWN_IF_EVER_SMOKED": {
+          "text": "UNKNOWN_IF_EVER_SMOKED",
           "meaning": "OMOP:45885135",
           "instantiates": [],
           "implements": [],
@@ -35953,7 +35745,6 @@
           "extensions": {},
           "annotations": {},
           "alt_descriptions": {},
-          "title": "UNKNOWN_IF_EVER_SMOKED",
           "todos": [],
           "notes": [],
           "comments": [],
@@ -37088,9 +36879,9 @@
       "name": "ActivityTypeEnum",
       "description": "A constrained set of enumerative values describing types of activities.",
       "permissible_values": {
-        "ANTIHYPERLIPIDEMICS_MEDICATION_USE": {
-          "text": "ANTIHYPERLIPIDEMICS_MEDICATION_USE",
-          "description": "The act of taking one or more medication in the class of \"antihyperlipidemics\"",
+        "FASTING": {
+          "text": "FASTING",
+          "description": "Abstaining from intake of food or liquid",
           "instantiates": [],
           "implements": [],
           "mixins": [],
@@ -37169,36 +36960,9 @@
           "categories": [],
           "keywords": []
         },
-        "FASTING": {
-          "text": "FASTING",
-          "description": "Abstaining from intake of food or liquid",
-          "instantiates": [],
-          "implements": [],
-          "mixins": [],
-          "extensions": {},
-          "annotations": {},
-          "alt_descriptions": {},
-          "todos": [],
-          "notes": [],
-          "comments": [],
-          "examples": [],
-          "in_subset": [],
-          "see_also": [],
-          "aliases": [],
-          "structured_aliases": {},
-          "mappings": [],
-          "exact_mappings": [],
-          "close_mappings": [],
-          "related_mappings": [],
-          "narrow_mappings": [],
-          "broad_mappings": [],
-          "contributors": [],
-          "categories": [],
-          "keywords": []
-        },
-        "MEDICAL_PROCEDURE": {
-          "text": "MEDICAL_PROCEDURE",
-          "description": "A therapeutic or diagnostic procedure undertaken in the context of healthcare or research",
+        "ANTIHYPERLIPIDEMICS_MEDICATION_USE": {
+          "text": "ANTIHYPERLIPIDEMICS_MEDICATION_USE",
+          "description": "The act of taking one or more medication in the class of \"antihyperlipidemics\"",
           "instantiates": [],
           "implements": [],
           "mixins": [],
@@ -37250,9 +37014,9 @@
           "categories": [],
           "keywords": []
         },
-        "SLEEP": {
-          "text": "SLEEP",
-          "description": "The act of sleeping or being in a state of rest",
+        "MEDICAL_PROCEDURE": {
+          "text": "MEDICAL_PROCEDURE",
+          "description": "A therapeutic or diagnostic procedure undertaken in the context of healthcare or research",
           "instantiates": [],
           "implements": [],
           "mixins": [],
@@ -37605,8 +37369,8 @@
       "name": "SdohEnum",
       "description": "A constrained set of enumerative values describing social determinants of health measurement variables.",
       "permissible_values": {
-        "OMOP:4076114": {
-          "text": "OMOP:4076114",
+        "FAMILY_INCOME": {
+          "text": "FAMILY_INCOME",
           "description": "The sum of the income of all family members 15 years and older living in the household over 12 months, before taxes",
           "meaning": "OMOP:4076114",
           "instantiates": [],
@@ -37615,7 +37379,6 @@
           "extensions": {},
           "annotations": {},
           "alt_descriptions": {},
-          "title": "FAMILY_INCOME",
           "todos": [],
           "notes": [],
           "comments": [],
@@ -37635,8 +37398,8 @@
           "keywords": [],
           "meaning_url": "https://athena.ohdsi.org/search-terms/terms/4076114"
         },
-        "OMOP:4022643": {
-          "text": "OMOP:4022643",
+        "EDUCATIONAL_ATTAINMENT": {
+          "text": "EDUCATIONAL_ATTAINMENT",
           "description": "The highest level of education that an individual has completed",
           "meaning": "OMOP:4022643",
           "instantiates": [],
@@ -37645,7 +37408,6 @@
           "extensions": {},
           "annotations": {},
           "alt_descriptions": {},
-          "title": "EDUCATIONAL_ATTAINMENT",
           "todos": [],
           "notes": [],
           "comments": [],
@@ -37665,8 +37427,8 @@
           "keywords": [],
           "meaning_url": "https://athena.ohdsi.org/search-terms/terms/4022643"
         },
-        "OMOP:36203487": {
-          "text": "OMOP:36203487",
+        "OCCUPATION": {
+          "text": "OCCUPATION",
           "description": "Current type of work participant does to make money",
           "meaning": "OMOP:36203487",
           "instantiates": [],
@@ -37675,7 +37437,6 @@
           "extensions": {},
           "annotations": {},
           "alt_descriptions": {},
-          "title": "OCCUPATION",
           "todos": [],
           "notes": [],
           "comments": [],
